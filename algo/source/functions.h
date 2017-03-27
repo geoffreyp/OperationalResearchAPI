@@ -9,7 +9,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <zconf.h>
+#include <unistd.h>
 
 /* Initialisation of variables & test program arguments */
 int initParameters(int argc, char * argv[], int * sizeOfSolution, int * numberOfEvaluation);
