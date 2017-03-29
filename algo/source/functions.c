@@ -65,3 +65,19 @@ int askFitness(const int *solution, int size) {
 
     return atoi(buf);
 }
+
+void chooseBetterSolution(const int * solution, int size, int fitness, int nbEval, int * betterSolution){
+    copyTab(solution, betterSolution, size);
+    swapTwoItems(betterSolution,size);
+    //int betterFitness = askFitness(betterSolution,size);
+}
+
+void copyTab(const int * original, int * copy, int size){
+    for (int i = 0; i < size; ++i) {
+        copy[i] = original[i];
+    }
+}
+
+void swapTwoItems(int * solution, int size){
+
+}
