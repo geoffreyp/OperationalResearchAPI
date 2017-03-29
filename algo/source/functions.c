@@ -32,7 +32,7 @@ int initParameters(int argc, char * argv[], int * sizeOfSolution, int * numberOf
 
 void loadInitialSolution(int *solution, int size) {
 
-   printf("{\"message\":\"claim_initial_solution\"}");
+   printf("{\"message\":\"claim_initial_solution\"}\n");
 
     int i = 0;
     char buf[BUFFER_SIZE];
@@ -51,7 +51,7 @@ void loadInitialSolution(int *solution, int size) {
     }
 }
 
-void askFitness(const int *solution, int size) {
+int askFitness(const int *solution, int size) {
     printf("{\"message\":\"claim_fitness\",\"solution\":[");
     for (int i = 0; i < size; ++i) {
         printf("%d", *(solution + i));
@@ -59,5 +59,9 @@ void askFitness(const int *solution, int size) {
             printf(",");
         }
     }
-    printf("]}");
+    printf("]}\n");
+    char buf[BUFFER_SIZE];
+    read(0,buf,sizeof(buf));
+
+    return atoi(buf);
 }

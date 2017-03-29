@@ -16,8 +16,8 @@ int main(int argc, char *argv[]) {
 
     loadInitialSolution(solution, size);
 
-    askFitness(solution, size);
-
+    int fitness = askFitness(solution, size);
+    printf("Fitness value for solution initial = %d", fitness);
 
     return 0;
 }
