@@ -16,7 +16,7 @@ int main(int argc, char *argv[]) {
 
     loadInitialSolution(solution, size);
 
-    sendSolution(solution,size);
+    askFitness(solution, size);
 
 
     return 0;

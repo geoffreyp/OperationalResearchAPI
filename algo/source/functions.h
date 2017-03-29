@@ -15,9 +15,9 @@
 int initParameters(int argc, char * argv[], int * sizeOfSolution, int * numberOfEvaluation);
 
 /* Listen the server & load the initial solution */
-void loadInitialSolution(int *tab, int size);
+void loadInitialSolution(int *solution, int size);
 
 /* Send a solution to the server */
-void sendSolution(int *tab, int size);
+void askFitness(const int *solution, int size);
 
 #endif

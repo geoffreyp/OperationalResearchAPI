@@ -30,9 +30,9 @@ int initParameters(int argc, char * argv[], int * sizeOfSolution, int * numberOf
     return 0;
 }
 
-void loadInitialSolution(int *tab, int size) {
-    char ask[23] = "write_initial_solution";
-    write(0,ask, sizeof(ask));
+void loadInitialSolution(int *solution, int size) {
+
+   printf("{\"message\":\"claim_initial_solution\"}");
 
     int i = 0;
     char buf[BUFFER_SIZE];
@@ -41,7 +41,7 @@ void loadInitialSolution(int *tab, int size) {
 
     while (token != NULL)
     {
-        tab[i] = atoi(token);
+        solution[i] = atoi(token);
         if(i<size){
             i++;
         } else{
@@ -51,13 +51,13 @@ void loadInitialSolution(int *tab, int size) {
     }
 }
 
-void sendSolution(int *tab, int size) {
-    printf("{");
+void askFitness(const int *solution, int size) {
+    printf("{\"message\":\"claim_fitness\",\"solution\":[");
     for (int i = 0; i < size; ++i) {
-        printf("%d", *(tab + i));
+        printf("%d", *(solution + i));
         if (i < size - 1) {
-            printf(";");
+            printf(",");
         }
     }
-    printf("}");
+    printf("]}");
 }
