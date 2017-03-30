@@ -17,11 +17,12 @@ int main(int argc, char *argv[]) {
     loadInitialSolution(solution, size);
 
     int fitness = askFitness(solution, size);
-    printf("Fitness value for solution initial = %d", fitness);
+    printf("Fitness value for solution initial = %d\n", fitness);
 
     for (int i = 0; i < nbEvalMax; ++i) {
-        int tmp[size];
-        chooseBetterSolution(solution,size,fitness,nbEvalMax, tmp);
+        int potentialBetterSolution[size];
+        int * potentialBetterFitness = 0;
+        chooseBetterSolution(solution,size,fitness,nbEvalMax, potentialBetterSolution, potentialBetterFitness);
     }
 
     return 0;
