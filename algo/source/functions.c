@@ -66,18 +66,20 @@ int askFitness(const int *solution, int size) {
     return atoi(buf);
 }
 
-void chooseBetterSolution(const int * solution, int size, int fitness, int nbEval, int * betterSolution, int * betterFitness){
+int chooseBetterSolution(const int * solution, int size, int fitness, int nbEval, int * betterSolution){
+    int betterFitness = 0;
     copyTab(solution, betterSolution, size);
 
     for (int i = 0; i < nbEval; ++i) {
         swapTwoItems(betterSolution,size);
-        *betterFitness = askFitness(betterSolution,size);
-        if(*betterFitness <= fitness){
-            return; // STOP :  better solution found
-        } else{
-            *betterFitness = 0; // CONTINUE : if we don't find better solution, we return 0
+
+        betterFitness = askFitness(betterSolution,size);
+        if(betterFitness <= fitness){
+            printf("== DEBUG == Better solution founded\n");
+            return betterFitness; // STOP :  better solution found
         }
     }
+    return 0;
 }
 
 void copyTab(const int * original, int * copy, int size){

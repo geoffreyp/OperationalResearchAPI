@@ -21,9 +21,10 @@ int main(int argc, char *argv[]) {
 
     for (int i = 0; i < nbEvalMax; ++i) {
         int potentialBetterSolution[size];
-        int * potentialBetterFitness = 0;
-        chooseBetterSolution(solution,size,fitness,nbEvalMax, potentialBetterSolution, potentialBetterFitness);
+        int  potentialBetterFitness = chooseBetterSolution(solution,size,fitness,nbEvalMax, potentialBetterSolution);
+        printf("\n== DEBUG == better sol for eval %d est %d\n",i,potentialBetterFitness);
     }
 
+    printf("Success");
     return 0;
 }

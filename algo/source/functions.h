@@ -25,6 +25,6 @@ void loadInitialSolution(int *solution, int size);
 /* Send a solution to the server to receive the solution's fitness value*/
 int askFitness(const int *solution, int size);
 
-void chooseBetterSolution(const int * solution, int size, int bestFitness, int nbEval, int * betterSolution, int * betterFitness);
+int chooseBetterSolution(const int * solution, int size, int bestFitness, int nbEval, int * betterSolution);
 
 #endif
