@@ -25,10 +25,19 @@ int main(int argc, char *argv[]) {
 
         if(potentialBetterFitness < fitness){
             fitness = potentialBetterFitness;
+            copyTab(potentialBetterSolution, solution, size);
             printf("\n== DEBUG == new best fitness : %d\n",fitness);
         }
     }
 
-    printf("Best fitness = %d",fitness);
+    printf("{\"message\":\"finish\",\"best_fitness\":%d,\"best_solution\":[",fitness);
+
+    for (int i = 0; i < size; ++i) {
+        printf("%d", *(solution + i));
+        if (i < size - 1) {
+            printf(",");
+        }
+    }
+    printf("]}\n");
     return 0;
 }
