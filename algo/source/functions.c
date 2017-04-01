@@ -51,7 +51,7 @@ void loadInitialSolution(int *solution, int size) {
     }
 }
 
-int askFitness(const int *solution, int size) {
+double askFitness(const int *solution, int size) {
     printf("{\"message\":\"claim_fitness\",\"solution\":[");
     for (int i = 0; i < size; ++i) {
         printf("%d", *(solution + i));
@@ -63,11 +63,11 @@ int askFitness(const int *solution, int size) {
     char buf[BUFFER_SIZE];
     read(0,buf,sizeof(buf));
 
-    return atoi(buf);
+    return atof(buf);
 }
 
-int chooseBetterSolution(const int * solution, int size, int fitness, int nbEval, int * betterSolution){
-    int betterFitness = 0;
+double chooseBetterSolution(const int * solution, int size, double fitness, int nbEval, int * betterSolution){
+    double betterFitness = 0;
     copyTab(solution, betterSolution, size);
 
     for (int i = 0; i < nbEval; ++i) {
