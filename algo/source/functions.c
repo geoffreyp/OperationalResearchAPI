@@ -75,11 +75,10 @@ int chooseBetterSolution(const int * solution, int size, int fitness, int nbEval
 
         betterFitness = askFitness(betterSolution,size);
         if(betterFitness <= fitness){
-            printf("== DEBUG == Better solution founded\n");
             return betterFitness; // STOP :  better solution found
         }
     }
-    return 0;
+    return INT_MAX;
 }
 
 void copyTab(const int * original, int * copy, int size){
@@ -97,3 +96,4 @@ void swapTwoItems(int * solution, int size){
     solution[r2] = tmp;
     printf("random %d et %d",r1,r2);
 }
+

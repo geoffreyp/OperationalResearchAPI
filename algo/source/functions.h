@@ -11,6 +11,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <time.h>
+#include <limits.h>
 
 /* Initialisation of variables & test program arguments */
 int initParameters(int argc, char * argv[], int * sizeOfSolution, int * numberOfEvaluation);

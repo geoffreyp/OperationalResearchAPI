@@ -22,9 +22,13 @@ int main(int argc, char *argv[]) {
     for (int i = 0; i < nbEvalMax; ++i) {
         int potentialBetterSolution[size];
         int  potentialBetterFitness = chooseBetterSolution(solution,size,fitness,nbEvalMax, potentialBetterSolution);
-        printf("\n== DEBUG == better sol for eval %d est %d\n",i,potentialBetterFitness);
+
+        if(potentialBetterFitness < fitness){
+            fitness = potentialBetterFitness;
+            printf("\n== DEBUG == new best fitness : %d\n",fitness);
+        }
     }
 
-    printf("Success");
+    printf("Best fitness = %d",fitness);
     return 0;
 }
