@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package api;
+
+service OperationalResearch {
+    rpc InitConversation (InitRequest) returns (FitnessResponse) {}
+    rpc SendFitness (FitnessRequest) returns (FitnessResponse) {}
+    rpc StopConversation (StopRequest) returns (StopResponse) {}
+}
+
+message InitRequest {
+    string customer = 1;
+    int32 solutionSize = 2;
+    int32 evalNb = 3;
+    string solution = 4;
+}
+
+message FitnessResponse {
+    string id = 1;
+    string solution = 2;
+}
+
+message FitnessRequest {
+    string id = 1;
+    double fitness = 2;
+}
+
+message StopRequest {
+    string id = 1;
+    string message = 2;
+}
+
+message StopResponse {
+    string id = 1;
+    string solution = 2;
+    double fitness = 3;
+}

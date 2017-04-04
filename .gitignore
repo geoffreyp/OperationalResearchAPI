@@ -5,3 +5,7 @@ CMakeLists.txt
 
 # Language C
 *.o
+
+# Executable
+server
+client
