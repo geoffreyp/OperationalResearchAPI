@@ -9,3 +9,6 @@ CMakeLists.txt
 # Executable
 server
 client
+
+# Python
+*.pyc
