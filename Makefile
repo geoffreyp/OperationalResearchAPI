@@ -1,7 +1,9 @@
 HOST_SYSTEM = $(shell uname | cut -f 1 -d_)
 SYSTEM ?= $(HOST_SYSTEM)
 CXX = g++
-CPPFLAGS += -I/usr/local/include -pthread
+CPPFLAGS += -I/usr/local/include -I/usr/local/include/mongocxx/v_noabi -I/usr/local/include/libmongoc-1.0 \
+-I/usr/local/include/bsoncxx/v_noabi -I/usr/local/include/libbson-1.0 \
+-L/usr/local/lib -lmongocxx -lbsoncxx -pthread
 CXXFLAGS += -std=c++11
 ifeq ($(SYSTEM),Darwin)
 LDFLAGS += -L/usr/local/lib `pkg-config --libs grpc++ grpc`       \
