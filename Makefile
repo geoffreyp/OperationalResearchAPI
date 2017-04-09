@@ -34,7 +34,7 @@ server: protoClassServer/api.pb.o protoClassServer/api.grpc.pb.o server.o
 protoClassServer/%.grpc.pb.cc: protos/%.proto
 	$(PROTOC) -I $(PROTOS_PATH) --grpc_out=./protoClassServer --plugin=protoc-gen-grpc=$(GRPC_CPP_PLUGIN_PATH) $<
 
-.PRECIOUS: protoClass/%.pb.cc
+.PRECIOUS: protoClassServer/%.pb.cc
 protoClassServer/%.pb.cc: protos/%.proto
 	$(PROTOC) -I $(PROTOS_PATH) --cpp_out=./protoClassServer $<
 
