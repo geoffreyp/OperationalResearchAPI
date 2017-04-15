@@ -1,6 +1,5 @@
 #IDE
 cmake-build-debug
-CMakeLists.txt
 .idea
 
 # Language C
