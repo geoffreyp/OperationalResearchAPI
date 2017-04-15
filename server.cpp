@@ -41,7 +41,10 @@ class ORServiceImpl final : public api::OperationalResearch::Service {
 
         auto collection = conn[BDD][BDD_COLLECTION];
         document << "transaction_id" << _id;
+        document << "customer" << request->customer();
         document << "solution" << request->solution();
+        document << "solution_size" << request->solutionsize();
+        document << "number_of_evaluation" << request->evalnb();
         collection.insert_one(document.view());
 
         return Status::OK;
