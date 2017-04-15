@@ -1,19 +1,20 @@
 #include <iostream>
 #include <memory>
-
 #include <bsoncxx/builder/stream/document.hpp>
 #include <bsoncxx/json.hpp>
-
 #include <mongocxx/client.hpp>
 #include <mongocxx/instance.hpp>
-
 #include <grpc++/grpc++.h>
+#include "libs/helper.h"
 
 #ifdef BAZEL_BUILD
 #include "protos/api.proto"
 #else
 #include "protoClassServer/api.grpc.pb.h"
 #endif
+
+#define BDD "api"
+#define BDD_COLLECTION "logs"
 
 using grpc::Server;
 using grpc::ServerBuilder;
@@ -29,9 +30,20 @@ using api::StopResponse;
 class ORServiceImpl final : public api::OperationalResearch::Service {
     Status InitConversation(ServerContext* context, const InitRequest* request,
                     FitnessResponse* reply) override {
-        std::string prefix("Hello ");
-        reply->set_id("Z5E2EZ5A1Z5Z5AAZDFHYY5G$");
-        reply->set_solution("randomize "+request->solution());
+
+        std::string _id(generateId());
+        reply->set_id(_id);
+        reply->set_solution(request->solution());
+
+        mongocxx::instance inst{};
+        mongocxx::client conn{mongocxx::uri{}};
+        bsoncxx::builder::stream::document document{};
+
+        auto collection = conn[BDD][BDD_COLLECTION];
+        document << "transaction_id" << _id;
+        document << "solution" << request->solution();
+        collection.insert_one(document.view());
+
         return Status::OK;
     }
 

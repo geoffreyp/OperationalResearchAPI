@@ -38,11 +38,14 @@ add_executable(server
         ${CMAKE_CURRENT_SOURCE_DIR}/server.cpp
         ${PROTO_SRCS}
         ${GRPC_SRCS}
-        )
+        libs/helper.h
+        libs/helper.cpp)
 target_link_libraries(server
         gRPC::grpc++_reflection
         protobuf::libprotobuf
         )
 
+target_link_libraries(server ${LIBMONGOCXX_LIBRARIES})
+target_link_libraries(server ${LIBBSONCXX_LIBRARIES})
 
 link_libraries(OperationalResearchApi ${LIBBSONCXX_LIBRARIES})
