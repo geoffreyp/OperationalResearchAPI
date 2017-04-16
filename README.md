@@ -10,6 +10,10 @@
 
 ``` git clone git@github.com:geoffreyp/OperationalResearchWebAPI.git```
 
-``` cd OperationalResearchWebAPI ```
+``` mkdir OperationalResearchWebAPI/build ```
 
-``` make ```
+``` cd OperationalResearchWebAPI/build ```
+
+``` cmake ..```
+
+``` make```
