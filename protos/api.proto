@@ -13,6 +13,7 @@ message InitRequest {
     int32 solutionSize = 2;
     int32 evalNb = 3;
     string solution = 4;
+    string algorithm = 5;
 }
 
 message FitnessResponse {
@@ -23,6 +24,7 @@ message FitnessResponse {
 message FitnessRequest {
     string id = 1;
     double fitness = 2;
+    string solution = 3;
 }
 
 message StopRequest {
