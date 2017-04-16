@@ -32,9 +32,12 @@ class ORServiceImpl final : public api::OperationalResearch::Service {
                     FitnessResponse* reply) override {
 
         std::string _id(generateId());
-        reply->set_id(_id);
-        reply->set_solution(request->solution());
 
+        // set the response
+        reply->set_id(_id);
+        reply->set_solution(getNeighbourSolution(request->solution()));
+
+        // save data in mongodb
         mongocxx::instance inst{};
         mongocxx::client conn{mongocxx::uri{}};
         bsoncxx::builder::stream::document document{};
