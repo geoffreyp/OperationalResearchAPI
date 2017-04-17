@@ -157,6 +157,20 @@ class InitRequest : public ::google::protobuf::Message /* @@protoc_insertion_poi
   ::std::string* release_solution();
   void set_allocated_solution(::std::string* solution);
 
+  // string algorithm = 5;
+  void clear_algorithm();
+  static const int kAlgorithmFieldNumber = 5;
+  const ::std::string& algorithm() const;
+  void set_algorithm(const ::std::string& value);
+  #if LANG_CXX11
+  void set_algorithm(::std::string&& value);
+  #endif
+  void set_algorithm(const char* value);
+  void set_algorithm(const char* value, size_t size);
+  ::std::string* mutable_algorithm();
+  ::std::string* release_algorithm();
+  void set_allocated_algorithm(::std::string* algorithm);
+
   // int32 solutionSize = 2;
   void clear_solutionsize();
   static const int kSolutionSizeFieldNumber = 2;
@@ -175,6 +189,7 @@ class InitRequest : public ::google::protobuf::Message /* @@protoc_insertion_poi
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::ArenaStringPtr customer_;
   ::google::protobuf::internal::ArenaStringPtr solution_;
+  ::google::protobuf::internal::ArenaStringPtr algorithm_;
   ::google::protobuf::int32 solutionsize_;
   ::google::protobuf::int32 evalnb_;
   mutable int _cached_size_;
@@ -369,6 +384,20 @@ class FitnessRequest : public ::google::protobuf::Message /* @@protoc_insertion_
   ::std::string* release_id();
   void set_allocated_id(::std::string* id);
 
+  // string solution = 3;
+  void clear_solution();
+  static const int kSolutionFieldNumber = 3;
+  const ::std::string& solution() const;
+  void set_solution(const ::std::string& value);
+  #if LANG_CXX11
+  void set_solution(::std::string&& value);
+  #endif
+  void set_solution(const char* value);
+  void set_solution(const char* value, size_t size);
+  ::std::string* mutable_solution();
+  ::std::string* release_solution();
+  void set_allocated_solution(::std::string* solution);
+
   // double fitness = 2;
   void clear_fitness();
   static const int kFitnessFieldNumber = 2;
@@ -380,6 +409,7 @@ class FitnessRequest : public ::google::protobuf::Message /* @@protoc_insertion_
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::ArenaStringPtr id_;
+  ::google::protobuf::internal::ArenaStringPtr solution_;
   double fitness_;
   mutable int _cached_size_;
   friend struct  protobuf_api_2eproto::TableStruct;
@@ -743,6 +773,58 @@ inline void InitRequest::set_allocated_solution(::std::string* solution) {
   // @@protoc_insertion_point(field_set_allocated:api.InitRequest.solution)
 }
 
+// string algorithm = 5;
+inline void InitRequest::clear_algorithm() {
+  algorithm_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& InitRequest::algorithm() const {
+  // @@protoc_insertion_point(field_get:api.InitRequest.algorithm)
+  return algorithm_.GetNoArena();
+}
+inline void InitRequest::set_algorithm(const ::std::string& value) {
+  
+  algorithm_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:api.InitRequest.algorithm)
+}
+#if LANG_CXX11
+inline void InitRequest::set_algorithm(::std::string&& value) {
+  
+  algorithm_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:api.InitRequest.algorithm)
+}
+#endif
+inline void InitRequest::set_algorithm(const char* value) {
+  
+  algorithm_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:api.InitRequest.algorithm)
+}
+inline void InitRequest::set_algorithm(const char* value, size_t size) {
+  
+  algorithm_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:api.InitRequest.algorithm)
+}
+inline ::std::string* InitRequest::mutable_algorithm() {
+  
+  // @@protoc_insertion_point(field_mutable:api.InitRequest.algorithm)
+  return algorithm_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* InitRequest::release_algorithm() {
+  // @@protoc_insertion_point(field_release:api.InitRequest.algorithm)
+  
+  return algorithm_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void InitRequest::set_allocated_algorithm(::std::string* algorithm) {
+  if (algorithm != NULL) {
+    
+  } else {
+    
+  }
+  algorithm_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), algorithm);
+  // @@protoc_insertion_point(field_set_allocated:api.InitRequest.algorithm)
+}
+
 // -------------------------------------------------------------------
 
 // FitnessResponse
@@ -919,6 +1001,58 @@ inline void FitnessRequest::set_fitness(double value) {
   
   fitness_ = value;
   // @@protoc_insertion_point(field_set:api.FitnessRequest.fitness)
+}
+
+// string solution = 3;
+inline void FitnessRequest::clear_solution() {
+  solution_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& FitnessRequest::solution() const {
+  // @@protoc_insertion_point(field_get:api.FitnessRequest.solution)
+  return solution_.GetNoArena();
+}
+inline void FitnessRequest::set_solution(const ::std::string& value) {
+  
+  solution_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:api.FitnessRequest.solution)
+}
+#if LANG_CXX11
+inline void FitnessRequest::set_solution(::std::string&& value) {
+  
+  solution_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:api.FitnessRequest.solution)
+}
+#endif
+inline void FitnessRequest::set_solution(const char* value) {
+  
+  solution_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:api.FitnessRequest.solution)
+}
+inline void FitnessRequest::set_solution(const char* value, size_t size) {
+  
+  solution_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:api.FitnessRequest.solution)
+}
+inline ::std::string* FitnessRequest::mutable_solution() {
+  
+  // @@protoc_insertion_point(field_mutable:api.FitnessRequest.solution)
+  return solution_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* FitnessRequest::release_solution() {
+  // @@protoc_insertion_point(field_release:api.FitnessRequest.solution)
+  
+  return solution_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void FitnessRequest::set_allocated_solution(::std::string* solution) {
+  if (solution != NULL) {
+    
+  } else {
+    
+  }
+  solution_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), solution);
+  // @@protoc_insertion_point(field_set_allocated:api.FitnessRequest.solution)
 }
 
 // -------------------------------------------------------------------

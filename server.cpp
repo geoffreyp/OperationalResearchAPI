@@ -14,7 +14,7 @@
 #endif
 
 #define BDD "api"
-#define BDD_COLLECTION "logs"
+#define TRANSACTION_COLLECTION "transactions"
 
 using grpc::Server;
 using grpc::ServerBuilder;
@@ -42,12 +42,13 @@ class ORServiceImpl final : public api::OperationalResearch::Service {
         mongocxx::client conn{mongocxx::uri{}};
         bsoncxx::builder::stream::document document{};
 
-        auto collection = conn[BDD][BDD_COLLECTION];
+        auto collection = conn[BDD][TRANSACTION_COLLECTION];
         document << "transaction_id" << _id;
         document << "customer" << request->customer();
-        document << "solution" << request->solution();
+        document << "solution_initial" << request->solution();
         document << "solution_size" << request->solutionsize();
         document << "number_of_evaluation" << request->evalnb();
+        document << "algorithm" << request->algorithm();
         collection.insert_one(document.view());
 
         return Status::OK;

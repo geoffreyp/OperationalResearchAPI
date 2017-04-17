@@ -47,6 +47,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] = {
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(InitRequest, solutionsize_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(InitRequest, evalnb_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(InitRequest, solution_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(InitRequest, algorithm_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FitnessResponse, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -59,6 +60,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] = {
   ~0u,  // no _oneof_case_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FitnessRequest, id_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FitnessRequest, fitness_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FitnessRequest, solution_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(StopRequest, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -76,10 +78,10 @@ const ::google::protobuf::uint32 TableStruct::offsets[] = {
 
 static const ::google::protobuf::internal::MigrationSchema schemas[] = {
   { 0, -1, sizeof(InitRequest)},
-  { 8, -1, sizeof(FitnessResponse)},
-  { 14, -1, sizeof(FitnessRequest)},
-  { 20, -1, sizeof(StopRequest)},
-  { 26, -1, sizeof(StopResponse)},
+  { 9, -1, sizeof(FitnessResponse)},
+  { 15, -1, sizeof(FitnessRequest)},
+  { 22, -1, sizeof(StopRequest)},
+  { 28, -1, sizeof(StopResponse)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -144,23 +146,23 @@ void InitDefaults() {
 void AddDescriptorsImpl() {
   InitDefaults();
   static const char descriptor[] = {
-      "\n\tapi.proto\022\003api\"W\n\013InitRequest\022\020\n\010custo"
+      "\n\tapi.proto\022\003api\"j\n\013InitRequest\022\020\n\010custo"
       "mer\030\001 \001(\t\022\024\n\014solutionSize\030\002 \001(\005\022\016\n\006evalN"
-      "b\030\003 \001(\005\022\020\n\010solution\030\004 \001(\t\"/\n\017FitnessResp"
-      "onse\022\n\n\002id\030\001 \001(\t\022\020\n\010solution\030\002 \001(\t\"-\n\016Fi"
-      "tnessRequest\022\n\n\002id\030\001 \001(\t\022\017\n\007fitness\030\002 \001("
-      "\001\"*\n\013StopRequest\022\n\n\002id\030\001 \001(\t\022\017\n\007message\030"
-      "\002 \001(\t\"=\n\014StopResponse\022\n\n\002id\030\001 \001(\t\022\020\n\010sol"
-      "ution\030\002 \001(\t\022\017\n\007fitness\030\003 \001(\0012\312\001\n\023Operati"
-      "onalResearch\022<\n\020InitConversation\022\020.api.I"
-      "nitRequest\032\024.api.FitnessResponse\"\000\022:\n\013Se"
-      "ndFitness\022\023.api.FitnessRequest\032\024.api.Fit"
-      "nessResponse\"\000\0229\n\020StopConversation\022\020.api"
-      ".StopRequest\032\021.api.StopResponse\"\000b\006proto"
-      "3"
+      "b\030\003 \001(\005\022\020\n\010solution\030\004 \001(\t\022\021\n\talgorithm\030\005"
+      " \001(\t\"/\n\017FitnessResponse\022\n\n\002id\030\001 \001(\t\022\020\n\010s"
+      "olution\030\002 \001(\t\"\?\n\016FitnessRequest\022\n\n\002id\030\001 "
+      "\001(\t\022\017\n\007fitness\030\002 \001(\001\022\020\n\010solution\030\003 \001(\t\"*"
+      "\n\013StopRequest\022\n\n\002id\030\001 \001(\t\022\017\n\007message\030\002 \001"
+      "(\t\"=\n\014StopResponse\022\n\n\002id\030\001 \001(\t\022\020\n\010soluti"
+      "on\030\002 \001(\t\022\017\n\007fitness\030\003 \001(\0012\312\001\n\023Operationa"
+      "lResearch\022<\n\020InitConversation\022\020.api.Init"
+      "Request\032\024.api.FitnessResponse\"\000\022:\n\013SendF"
+      "itness\022\023.api.FitnessRequest\032\024.api.Fitnes"
+      "sResponse\"\000\0229\n\020StopConversation\022\020.api.St"
+      "opRequest\032\021.api.StopResponse\"\000b\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 521);
+      descriptor, 558);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "api.proto", &protobuf_RegisterTypes);
   ::google::protobuf::internal::OnShutdown(&TableStruct::Shutdown);
@@ -187,6 +189,7 @@ const int InitRequest::kCustomerFieldNumber;
 const int InitRequest::kSolutionSizeFieldNumber;
 const int InitRequest::kEvalNbFieldNumber;
 const int InitRequest::kSolutionFieldNumber;
+const int InitRequest::kAlgorithmFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 InitRequest::InitRequest()
@@ -210,6 +213,10 @@ InitRequest::InitRequest(const InitRequest& from)
   if (from.solution().size() > 0) {
     solution_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.solution_);
   }
+  algorithm_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.algorithm().size() > 0) {
+    algorithm_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.algorithm_);
+  }
   ::memcpy(&solutionsize_, &from.solutionsize_,
     reinterpret_cast<char*>(&evalnb_) -
     reinterpret_cast<char*>(&solutionsize_) + sizeof(evalnb_));
@@ -219,6 +226,7 @@ InitRequest::InitRequest(const InitRequest& from)
 void InitRequest::SharedCtor() {
   customer_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   solution_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  algorithm_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(&solutionsize_, 0, reinterpret_cast<char*>(&evalnb_) -
     reinterpret_cast<char*>(&solutionsize_) + sizeof(evalnb_));
   _cached_size_ = 0;
@@ -232,6 +240,7 @@ InitRequest::~InitRequest() {
 void InitRequest::SharedDtor() {
   customer_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   solution_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  algorithm_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 void InitRequest::SetCachedSize(int size) const {
@@ -261,6 +270,7 @@ void InitRequest::Clear() {
 // @@protoc_insertion_point(message_clear_start:api.InitRequest)
   customer_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   solution_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  algorithm_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(&solutionsize_, 0, reinterpret_cast<char*>(&evalnb_) -
     reinterpret_cast<char*>(&solutionsize_) + sizeof(evalnb_));
 }
@@ -331,6 +341,21 @@ bool InitRequest::MergePartialFromCodedStream(
         break;
       }
 
+      // string algorithm = 5;
+      case 5: {
+        if (tag == 42u) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_algorithm()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->algorithm().data(), this->algorithm().length(),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "api.InitRequest.algorithm"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       default: {
       handle_unusual:
         if (tag == 0 ||
@@ -385,6 +410,16 @@ void InitRequest::SerializeWithCachedSizes(
       4, this->solution(), output);
   }
 
+  // string algorithm = 5;
+  if (this->algorithm().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->algorithm().data(), this->algorithm().length(),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "api.InitRequest.algorithm");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      5, this->algorithm(), output);
+  }
+
   // @@protoc_insertion_point(serialize_end:api.InitRequest)
 }
 
@@ -424,6 +459,17 @@ void InitRequest::SerializeWithCachedSizes(
         4, this->solution(), target);
   }
 
+  // string algorithm = 5;
+  if (this->algorithm().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->algorithm().data(), this->algorithm().length(),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "api.InitRequest.algorithm");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        5, this->algorithm(), target);
+  }
+
   // @@protoc_insertion_point(serialize_to_array_end:api.InitRequest)
   return target;
 }
@@ -444,6 +490,13 @@ size_t InitRequest::ByteSizeLong() const {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->solution());
+  }
+
+  // string algorithm = 5;
+  if (this->algorithm().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->algorithm());
   }
 
   // int32 solutionSize = 2;
@@ -494,6 +547,10 @@ void InitRequest::MergeFrom(const InitRequest& from) {
 
     solution_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.solution_);
   }
+  if (from.algorithm().size() > 0) {
+
+    algorithm_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.algorithm_);
+  }
   if (from.solutionsize() != 0) {
     set_solutionsize(from.solutionsize());
   }
@@ -527,6 +584,7 @@ void InitRequest::Swap(InitRequest* other) {
 void InitRequest::InternalSwap(InitRequest* other) {
   customer_.Swap(&other->customer_);
   solution_.Swap(&other->solution_);
+  algorithm_.Swap(&other->algorithm_);
   std::swap(solutionsize_, other->solutionsize_);
   std::swap(evalnb_, other->evalnb_);
   std::swap(_cached_size_, other->_cached_size_);
@@ -670,6 +728,58 @@ void InitRequest::set_allocated_solution(::std::string* solution) {
   }
   solution_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), solution);
   // @@protoc_insertion_point(field_set_allocated:api.InitRequest.solution)
+}
+
+// string algorithm = 5;
+void InitRequest::clear_algorithm() {
+  algorithm_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+const ::std::string& InitRequest::algorithm() const {
+  // @@protoc_insertion_point(field_get:api.InitRequest.algorithm)
+  return algorithm_.GetNoArena();
+}
+void InitRequest::set_algorithm(const ::std::string& value) {
+  
+  algorithm_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:api.InitRequest.algorithm)
+}
+#if LANG_CXX11
+void InitRequest::set_algorithm(::std::string&& value) {
+  
+  algorithm_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:api.InitRequest.algorithm)
+}
+#endif
+void InitRequest::set_algorithm(const char* value) {
+  
+  algorithm_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:api.InitRequest.algorithm)
+}
+void InitRequest::set_algorithm(const char* value, size_t size) {
+  
+  algorithm_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:api.InitRequest.algorithm)
+}
+::std::string* InitRequest::mutable_algorithm() {
+  
+  // @@protoc_insertion_point(field_mutable:api.InitRequest.algorithm)
+  return algorithm_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+::std::string* InitRequest::release_algorithm() {
+  // @@protoc_insertion_point(field_release:api.InitRequest.algorithm)
+  
+  return algorithm_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+void InitRequest::set_allocated_algorithm(::std::string* algorithm) {
+  if (algorithm != NULL) {
+    
+  } else {
+    
+  }
+  algorithm_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), algorithm);
+  // @@protoc_insertion_point(field_set_allocated:api.InitRequest.algorithm)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -1068,6 +1178,7 @@ void FitnessResponse::set_allocated_solution(::std::string* solution) {
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int FitnessRequest::kIdFieldNumber;
 const int FitnessRequest::kFitnessFieldNumber;
+const int FitnessRequest::kSolutionFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 FitnessRequest::FitnessRequest()
@@ -1087,12 +1198,17 @@ FitnessRequest::FitnessRequest(const FitnessRequest& from)
   if (from.id().size() > 0) {
     id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.id_);
   }
+  solution_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.solution().size() > 0) {
+    solution_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.solution_);
+  }
   fitness_ = from.fitness_;
   // @@protoc_insertion_point(copy_constructor:api.FitnessRequest)
 }
 
 void FitnessRequest::SharedCtor() {
   id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  solution_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   fitness_ = 0;
   _cached_size_ = 0;
 }
@@ -1104,6 +1220,7 @@ FitnessRequest::~FitnessRequest() {
 
 void FitnessRequest::SharedDtor() {
   id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  solution_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 void FitnessRequest::SetCachedSize(int size) const {
@@ -1132,6 +1249,7 @@ FitnessRequest* FitnessRequest::New(::google::protobuf::Arena* arena) const {
 void FitnessRequest::Clear() {
 // @@protoc_insertion_point(message_clear_start:api.FitnessRequest)
   id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  solution_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   fitness_ = 0;
 }
 
@@ -1167,6 +1285,21 @@ bool FitnessRequest::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
                  input, &fitness_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // string solution = 3;
+      case 3: {
+        if (tag == 26u) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_solution()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->solution().data(), this->solution().length(),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "api.FitnessRequest.solution"));
         } else {
           goto handle_unusual;
         }
@@ -1212,6 +1345,16 @@ void FitnessRequest::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteDouble(2, this->fitness(), output);
   }
 
+  // string solution = 3;
+  if (this->solution().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->solution().data(), this->solution().length(),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "api.FitnessRequest.solution");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      3, this->solution(), output);
+  }
+
   // @@protoc_insertion_point(serialize_end:api.FitnessRequest)
 }
 
@@ -1235,6 +1378,17 @@ void FitnessRequest::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(2, this->fitness(), target);
   }
 
+  // string solution = 3;
+  if (this->solution().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->solution().data(), this->solution().length(),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "api.FitnessRequest.solution");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        3, this->solution(), target);
+  }
+
   // @@protoc_insertion_point(serialize_to_array_end:api.FitnessRequest)
   return target;
 }
@@ -1248,6 +1402,13 @@ size_t FitnessRequest::ByteSizeLong() const {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->id());
+  }
+
+  // string solution = 3;
+  if (this->solution().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->solution());
   }
 
   // double fitness = 2;
@@ -1285,6 +1446,10 @@ void FitnessRequest::MergeFrom(const FitnessRequest& from) {
 
     id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.id_);
   }
+  if (from.solution().size() > 0) {
+
+    solution_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.solution_);
+  }
   if (from.fitness() != 0) {
     set_fitness(from.fitness());
   }
@@ -1314,6 +1479,7 @@ void FitnessRequest::Swap(FitnessRequest* other) {
 }
 void FitnessRequest::InternalSwap(FitnessRequest* other) {
   id_.Swap(&other->id_);
+  solution_.Swap(&other->solution_);
   std::swap(fitness_, other->fitness_);
   std::swap(_cached_size_, other->_cached_size_);
 }
@@ -1390,6 +1556,58 @@ void FitnessRequest::set_fitness(double value) {
   
   fitness_ = value;
   // @@protoc_insertion_point(field_set:api.FitnessRequest.fitness)
+}
+
+// string solution = 3;
+void FitnessRequest::clear_solution() {
+  solution_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+const ::std::string& FitnessRequest::solution() const {
+  // @@protoc_insertion_point(field_get:api.FitnessRequest.solution)
+  return solution_.GetNoArena();
+}
+void FitnessRequest::set_solution(const ::std::string& value) {
+  
+  solution_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:api.FitnessRequest.solution)
+}
+#if LANG_CXX11
+void FitnessRequest::set_solution(::std::string&& value) {
+  
+  solution_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:api.FitnessRequest.solution)
+}
+#endif
+void FitnessRequest::set_solution(const char* value) {
+  
+  solution_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:api.FitnessRequest.solution)
+}
+void FitnessRequest::set_solution(const char* value, size_t size) {
+  
+  solution_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:api.FitnessRequest.solution)
+}
+::std::string* FitnessRequest::mutable_solution() {
+  
+  // @@protoc_insertion_point(field_mutable:api.FitnessRequest.solution)
+  return solution_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+::std::string* FitnessRequest::release_solution() {
+  // @@protoc_insertion_point(field_release:api.FitnessRequest.solution)
+  
+  return solution_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+void FitnessRequest::set_allocated_solution(::std::string* solution) {
+  if (solution != NULL) {
+    
+  } else {
+    
+  }
+  solution_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), solution);
+  // @@protoc_insertion_point(field_set_allocated:api.FitnessRequest.solution)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
