@@ -15,6 +15,7 @@
 
 #define BDD "api"
 #define TRANSACTION_COLLECTION "transactions"
+#define FITNESS_COLLECTION "fitness"
 
 using grpc::Server;
 using grpc::ServerBuilder;
@@ -26,21 +27,31 @@ using api::FitnessRequest;
 using api::StopRequest;
 using api::StopResponse;
 
-
+/*
+ * Implement Protobuf OperationalResearch Service
+ */
 class ORServiceImpl final : public api::OperationalResearch::Service {
 
 private:
     mongocxx::client conn;
     mongocxx::collection transac_coll;
+    mongocxx::collection fitness_coll;
 
 public:
 
+    /*
+     * Constructor
+     */
     ORServiceImpl(){
         mongocxx::instance inst{};
         conn = mongocxx::uri{};
         transac_coll = conn[BDD][TRANSACTION_COLLECTION];
+        fitness_coll = conn[BDD][FITNESS_COLLECTION];
     }
 
+    /*
+     * Implement ProtoBuff Rpc Methods
+     */
     Status InitConversation(ServerContext* context, const InitRequest* request,
                     FitnessResponse* reply) override {
 
@@ -64,8 +75,30 @@ public:
     }
 
 
+    Status SendFitness(ServerContext* context, const FitnessRequest* request,
+                            FitnessResponse* reply) override {
+
+        //set the response
+        reply->set_id(request->id());
+        reply->set_solution(getNeighbourSolution(request->solution()));
+
+        // save data in mongodb
+        bsoncxx::builder::stream::document document{};
+        document << "transaction_id" << request->id();
+        document << "solution" << request->solution();
+        document << "fitness" << request->fitness();
+
+        fitness_coll.insert_one(document.view());
+
+        return Status::OK;
+    }
+
+
 };
 
+/*
+ * Run Server method
+ */
 void RunServer() {
     std::string server_address("0.0.0.0:50051");
     ORServiceImpl service;
