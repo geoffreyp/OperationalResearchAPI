@@ -13,7 +13,7 @@ def run():
   stub = api_pb2_grpc.OperationalResearchStub(channel)
 
   print("Init the transaction : ")
-  response = stub.InitConversation(api_pb2.InitRequest(customer='Florian', algorithm="hillclimber_first_improvement", solutionSize=5, evalNb=2, solution='1-2-3-4-5'))
+  response = stub.InitConversation(api_pb2.InitRequest(customer='Florian', algorithm="hillclimber_first_improvement", solutionSize=5, fitness=100, solution='1-2-3-4-5'))
   print("Client received Id : " + response.id)
   print("Client received Solution : " + response.solution)
 

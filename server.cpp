@@ -62,14 +62,22 @@ public:
         reply->set_solution(getNeighbourSolution(request->solution()));
 
         // save data in mongodb
-        bsoncxx::builder::stream::document document{};
-        document << "transaction_id" << _id;
-        document << "customer" << request->customer();
-        document << "solution_initial" << request->solution();
-        document << "solution_size" << request->solutionsize();
-        document << "number_of_evaluation" << request->evalnb();
-        document << "algorithm" << request->algorithm();
-        transac_coll.insert_one(document.view());
+        bsoncxx::builder::stream::document documentTransaction{};
+        documentTransaction << "transaction_id" << _id;
+        documentTransaction << "customer" << request->customer();
+        documentTransaction << "solution_initial" << request->solution();
+        documentTransaction << "solution_size" << request->solutionsize();
+
+
+        bsoncxx::builder::stream::document documentFitness{};
+        documentFitness << "transaction_id" << _id;
+        documentFitness << "solution" << request->solution();
+        documentFitness << "fitness" << request->fitness();
+        bsoncxx::types::value  fitnessId = fitness_coll.insert_one(documentFitness.view())->inserted_id();
+
+        documentTransaction << "best_fitness_id" << fitnessId;
+        documentTransaction << "algorithm" << request->algorithm();
+        transac_coll.insert_one(documentTransaction.view());
 
         return Status::OK;
     }

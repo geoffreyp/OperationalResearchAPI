@@ -11,7 +11,7 @@ service OperationalResearch {
 message InitRequest {
     string customer = 1;
     int32 solutionSize = 2;
-    int32 evalNb = 3;
+    double fitness = 3;
     string solution = 4;
     string algorithm = 5;
 }

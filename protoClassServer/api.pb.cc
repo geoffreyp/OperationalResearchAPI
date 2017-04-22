@@ -45,7 +45,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] = {
   ~0u,  // no _oneof_case_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(InitRequest, customer_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(InitRequest, solutionsize_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(InitRequest, evalnb_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(InitRequest, fitness_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(InitRequest, solution_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(InitRequest, algorithm_),
   ~0u,  // no _has_bits_
@@ -146,23 +146,23 @@ void InitDefaults() {
 void AddDescriptorsImpl() {
   InitDefaults();
   static const char descriptor[] = {
-      "\n\tapi.proto\022\003api\"j\n\013InitRequest\022\020\n\010custo"
-      "mer\030\001 \001(\t\022\024\n\014solutionSize\030\002 \001(\005\022\016\n\006evalN"
-      "b\030\003 \001(\005\022\020\n\010solution\030\004 \001(\t\022\021\n\talgorithm\030\005"
-      " \001(\t\"/\n\017FitnessResponse\022\n\n\002id\030\001 \001(\t\022\020\n\010s"
-      "olution\030\002 \001(\t\"\?\n\016FitnessRequest\022\n\n\002id\030\001 "
-      "\001(\t\022\017\n\007fitness\030\002 \001(\001\022\020\n\010solution\030\003 \001(\t\"*"
-      "\n\013StopRequest\022\n\n\002id\030\001 \001(\t\022\017\n\007message\030\002 \001"
-      "(\t\"=\n\014StopResponse\022\n\n\002id\030\001 \001(\t\022\020\n\010soluti"
-      "on\030\002 \001(\t\022\017\n\007fitness\030\003 \001(\0012\312\001\n\023Operationa"
-      "lResearch\022<\n\020InitConversation\022\020.api.Init"
-      "Request\032\024.api.FitnessResponse\"\000\022:\n\013SendF"
-      "itness\022\023.api.FitnessRequest\032\024.api.Fitnes"
-      "sResponse\"\000\0229\n\020StopConversation\022\020.api.St"
-      "opRequest\032\021.api.StopResponse\"\000b\006proto3"
+      "\n\tapi.proto\022\003api\"k\n\013InitRequest\022\020\n\010custo"
+      "mer\030\001 \001(\t\022\024\n\014solutionSize\030\002 \001(\005\022\017\n\007fitne"
+      "ss\030\003 \001(\001\022\020\n\010solution\030\004 \001(\t\022\021\n\talgorithm\030"
+      "\005 \001(\t\"/\n\017FitnessResponse\022\n\n\002id\030\001 \001(\t\022\020\n\010"
+      "solution\030\002 \001(\t\"\?\n\016FitnessRequest\022\n\n\002id\030\001"
+      " \001(\t\022\017\n\007fitness\030\002 \001(\001\022\020\n\010solution\030\003 \001(\t\""
+      "*\n\013StopRequest\022\n\n\002id\030\001 \001(\t\022\017\n\007message\030\002 "
+      "\001(\t\"=\n\014StopResponse\022\n\n\002id\030\001 \001(\t\022\020\n\010solut"
+      "ion\030\002 \001(\t\022\017\n\007fitness\030\003 \001(\0012\312\001\n\023Operation"
+      "alResearch\022<\n\020InitConversation\022\020.api.Ini"
+      "tRequest\032\024.api.FitnessResponse\"\000\022:\n\013Send"
+      "Fitness\022\023.api.FitnessRequest\032\024.api.Fitne"
+      "ssResponse\"\000\0229\n\020StopConversation\022\020.api.S"
+      "topRequest\032\021.api.StopResponse\"\000b\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 558);
+      descriptor, 559);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "api.proto", &protobuf_RegisterTypes);
   ::google::protobuf::internal::OnShutdown(&TableStruct::Shutdown);
@@ -187,7 +187,7 @@ struct StaticDescriptorInitializer {
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int InitRequest::kCustomerFieldNumber;
 const int InitRequest::kSolutionSizeFieldNumber;
-const int InitRequest::kEvalNbFieldNumber;
+const int InitRequest::kFitnessFieldNumber;
 const int InitRequest::kSolutionFieldNumber;
 const int InitRequest::kAlgorithmFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
@@ -217,9 +217,9 @@ InitRequest::InitRequest(const InitRequest& from)
   if (from.algorithm().size() > 0) {
     algorithm_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.algorithm_);
   }
-  ::memcpy(&solutionsize_, &from.solutionsize_,
-    reinterpret_cast<char*>(&evalnb_) -
-    reinterpret_cast<char*>(&solutionsize_) + sizeof(evalnb_));
+  ::memcpy(&fitness_, &from.fitness_,
+    reinterpret_cast<char*>(&solutionsize_) -
+    reinterpret_cast<char*>(&fitness_) + sizeof(solutionsize_));
   // @@protoc_insertion_point(copy_constructor:api.InitRequest)
 }
 
@@ -227,8 +227,8 @@ void InitRequest::SharedCtor() {
   customer_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   solution_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   algorithm_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  ::memset(&solutionsize_, 0, reinterpret_cast<char*>(&evalnb_) -
-    reinterpret_cast<char*>(&solutionsize_) + sizeof(evalnb_));
+  ::memset(&fitness_, 0, reinterpret_cast<char*>(&solutionsize_) -
+    reinterpret_cast<char*>(&fitness_) + sizeof(solutionsize_));
   _cached_size_ = 0;
 }
 
@@ -271,8 +271,8 @@ void InitRequest::Clear() {
   customer_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   solution_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   algorithm_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  ::memset(&solutionsize_, 0, reinterpret_cast<char*>(&evalnb_) -
-    reinterpret_cast<char*>(&solutionsize_) + sizeof(evalnb_));
+  ::memset(&fitness_, 0, reinterpret_cast<char*>(&solutionsize_) -
+    reinterpret_cast<char*>(&fitness_) + sizeof(solutionsize_));
 }
 
 bool InitRequest::MergePartialFromCodedStream(
@@ -313,13 +313,13 @@ bool InitRequest::MergePartialFromCodedStream(
         break;
       }
 
-      // int32 evalNb = 3;
+      // double fitness = 3;
       case 3: {
-        if (tag == 24u) {
+        if (tag == 25u) {
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &evalnb_)));
+                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                 input, &fitness_)));
         } else {
           goto handle_unusual;
         }
@@ -395,9 +395,9 @@ void InitRequest::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->solutionsize(), output);
   }
 
-  // int32 evalNb = 3;
-  if (this->evalnb() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->evalnb(), output);
+  // double fitness = 3;
+  if (this->fitness() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteDouble(3, this->fitness(), output);
   }
 
   // string solution = 4;
@@ -443,9 +443,9 @@ void InitRequest::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->solutionsize(), target);
   }
 
-  // int32 evalNb = 3;
-  if (this->evalnb() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->evalnb(), target);
+  // double fitness = 3;
+  if (this->fitness() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(3, this->fitness(), target);
   }
 
   // string solution = 4;
@@ -499,18 +499,16 @@ size_t InitRequest::ByteSizeLong() const {
         this->algorithm());
   }
 
+  // double fitness = 3;
+  if (this->fitness() != 0) {
+    total_size += 1 + 8;
+  }
+
   // int32 solutionSize = 2;
   if (this->solutionsize() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
         this->solutionsize());
-  }
-
-  // int32 evalNb = 3;
-  if (this->evalnb() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->evalnb());
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
@@ -551,11 +549,11 @@ void InitRequest::MergeFrom(const InitRequest& from) {
 
     algorithm_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.algorithm_);
   }
+  if (from.fitness() != 0) {
+    set_fitness(from.fitness());
+  }
   if (from.solutionsize() != 0) {
     set_solutionsize(from.solutionsize());
-  }
-  if (from.evalnb() != 0) {
-    set_evalnb(from.evalnb());
   }
 }
 
@@ -585,8 +583,8 @@ void InitRequest::InternalSwap(InitRequest* other) {
   customer_.Swap(&other->customer_);
   solution_.Swap(&other->solution_);
   algorithm_.Swap(&other->algorithm_);
+  std::swap(fitness_, other->fitness_);
   std::swap(solutionsize_, other->solutionsize_);
-  std::swap(evalnb_, other->evalnb_);
   std::swap(_cached_size_, other->_cached_size_);
 }
 
@@ -664,18 +662,18 @@ void InitRequest::set_solutionsize(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:api.InitRequest.solutionSize)
 }
 
-// int32 evalNb = 3;
-void InitRequest::clear_evalnb() {
-  evalnb_ = 0;
+// double fitness = 3;
+void InitRequest::clear_fitness() {
+  fitness_ = 0;
 }
-::google::protobuf::int32 InitRequest::evalnb() const {
-  // @@protoc_insertion_point(field_get:api.InitRequest.evalNb)
-  return evalnb_;
+double InitRequest::fitness() const {
+  // @@protoc_insertion_point(field_get:api.InitRequest.fitness)
+  return fitness_;
 }
-void InitRequest::set_evalnb(::google::protobuf::int32 value) {
+void InitRequest::set_fitness(double value) {
   
-  evalnb_ = value;
-  // @@protoc_insertion_point(field_set:api.InitRequest.evalNb)
+  fitness_ = value;
+  // @@protoc_insertion_point(field_set:api.InitRequest.fitness)
 }
 
 // string solution = 4;

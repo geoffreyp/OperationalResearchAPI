@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='api.proto',
   package='api',
   syntax='proto3',
-  serialized_pb=_b('\n\tapi.proto\x12\x03\x61pi\"j\n\x0bInitRequest\x12\x10\n\x08\x63ustomer\x18\x01 \x01(\t\x12\x14\n\x0csolutionSize\x18\x02 \x01(\x05\x12\x0e\n\x06\x65valNb\x18\x03 \x01(\x05\x12\x10\n\x08solution\x18\x04 \x01(\t\x12\x11\n\talgorithm\x18\x05 \x01(\t\"/\n\x0f\x46itnessResponse\x12\n\n\x02id\x18\x01 \x01(\t\x12\x10\n\x08solution\x18\x02 \x01(\t\"?\n\x0e\x46itnessRequest\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0f\n\x07\x66itness\x18\x02 \x01(\x01\x12\x10\n\x08solution\x18\x03 \x01(\t\"*\n\x0bStopRequest\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0f\n\x07message\x18\x02 \x01(\t\"=\n\x0cStopResponse\x12\n\n\x02id\x18\x01 \x01(\t\x12\x10\n\x08solution\x18\x02 \x01(\t\x12\x0f\n\x07\x66itness\x18\x03 \x01(\x01\x32\xca\x01\n\x13OperationalResearch\x12<\n\x10InitConversation\x12\x10.api.InitRequest\x1a\x14.api.FitnessResponse\"\x00\x12:\n\x0bSendFitness\x12\x13.api.FitnessRequest\x1a\x14.api.FitnessResponse\"\x00\x12\x39\n\x10StopConversation\x12\x10.api.StopRequest\x1a\x11.api.StopResponse\"\x00\x62\x06proto3')
+  serialized_pb=_b('\n\tapi.proto\x12\x03\x61pi\"k\n\x0bInitRequest\x12\x10\n\x08\x63ustomer\x18\x01 \x01(\t\x12\x14\n\x0csolutionSize\x18\x02 \x01(\x05\x12\x0f\n\x07\x66itness\x18\x03 \x01(\x01\x12\x10\n\x08solution\x18\x04 \x01(\t\x12\x11\n\talgorithm\x18\x05 \x01(\t\"/\n\x0f\x46itnessResponse\x12\n\n\x02id\x18\x01 \x01(\t\x12\x10\n\x08solution\x18\x02 \x01(\t\"?\n\x0e\x46itnessRequest\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0f\n\x07\x66itness\x18\x02 \x01(\x01\x12\x10\n\x08solution\x18\x03 \x01(\t\"*\n\x0bStopRequest\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0f\n\x07message\x18\x02 \x01(\t\"=\n\x0cStopResponse\x12\n\n\x02id\x18\x01 \x01(\t\x12\x10\n\x08solution\x18\x02 \x01(\t\x12\x0f\n\x07\x66itness\x18\x03 \x01(\x01\x32\xca\x01\n\x13OperationalResearch\x12<\n\x10InitConversation\x12\x10.api.InitRequest\x1a\x14.api.FitnessResponse\"\x00\x12:\n\x0bSendFitness\x12\x13.api.FitnessRequest\x1a\x14.api.FitnessResponse\"\x00\x12\x39\n\x10StopConversation\x12\x10.api.StopRequest\x1a\x11.api.StopResponse\"\x00\x62\x06proto3')
 )
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -48,9 +48,9 @@ _INITREQUEST = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='evalNb', full_name='api.InitRequest.evalNb', index=2,
-      number=3, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
+      name='fitness', full_name='api.InitRequest.fitness', index=2,
+      number=3, type=1, cpp_type=5, label=1,
+      has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -81,7 +81,7 @@ _INITREQUEST = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=18,
-  serialized_end=124,
+  serialized_end=125,
 )
 
 
@@ -118,8 +118,8 @@ _FITNESSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=126,
-  serialized_end=173,
+  serialized_start=127,
+  serialized_end=174,
 )
 
 
@@ -163,8 +163,8 @@ _FITNESSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=175,
-  serialized_end=238,
+  serialized_start=176,
+  serialized_end=239,
 )
 
 
@@ -201,8 +201,8 @@ _STOPREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=240,
-  serialized_end=282,
+  serialized_start=241,
+  serialized_end=283,
 )
 
 
@@ -246,8 +246,8 @@ _STOPRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=284,
-  serialized_end=345,
+  serialized_start=285,
+  serialized_end=346,
 )
 
 DESCRIPTOR.message_types_by_name['InitRequest'] = _INITREQUEST

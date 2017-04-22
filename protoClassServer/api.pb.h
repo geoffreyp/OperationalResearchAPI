@@ -171,17 +171,17 @@ class InitRequest : public ::google::protobuf::Message /* @@protoc_insertion_poi
   ::std::string* release_algorithm();
   void set_allocated_algorithm(::std::string* algorithm);
 
+  // double fitness = 3;
+  void clear_fitness();
+  static const int kFitnessFieldNumber = 3;
+  double fitness() const;
+  void set_fitness(double value);
+
   // int32 solutionSize = 2;
   void clear_solutionsize();
   static const int kSolutionSizeFieldNumber = 2;
   ::google::protobuf::int32 solutionsize() const;
   void set_solutionsize(::google::protobuf::int32 value);
-
-  // int32 evalNb = 3;
-  void clear_evalnb();
-  static const int kEvalNbFieldNumber = 3;
-  ::google::protobuf::int32 evalnb() const;
-  void set_evalnb(::google::protobuf::int32 value);
 
   // @@protoc_insertion_point(class_scope:api.InitRequest)
  private:
@@ -190,8 +190,8 @@ class InitRequest : public ::google::protobuf::Message /* @@protoc_insertion_poi
   ::google::protobuf::internal::ArenaStringPtr customer_;
   ::google::protobuf::internal::ArenaStringPtr solution_;
   ::google::protobuf::internal::ArenaStringPtr algorithm_;
+  double fitness_;
   ::google::protobuf::int32 solutionsize_;
-  ::google::protobuf::int32 evalnb_;
   mutable int _cached_size_;
   friend struct  protobuf_api_2eproto::TableStruct;
 };
@@ -707,18 +707,18 @@ inline void InitRequest::set_solutionsize(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:api.InitRequest.solutionSize)
 }
 
-// int32 evalNb = 3;
-inline void InitRequest::clear_evalnb() {
-  evalnb_ = 0;
+// double fitness = 3;
+inline void InitRequest::clear_fitness() {
+  fitness_ = 0;
 }
-inline ::google::protobuf::int32 InitRequest::evalnb() const {
-  // @@protoc_insertion_point(field_get:api.InitRequest.evalNb)
-  return evalnb_;
+inline double InitRequest::fitness() const {
+  // @@protoc_insertion_point(field_get:api.InitRequest.fitness)
+  return fitness_;
 }
-inline void InitRequest::set_evalnb(::google::protobuf::int32 value) {
+inline void InitRequest::set_fitness(double value) {
   
-  evalnb_ = value;
-  // @@protoc_insertion_point(field_set:api.InitRequest.evalNb)
+  fitness_ = value;
+  // @@protoc_insertion_point(field_set:api.InitRequest.fitness)
 }
 
 // string solution = 4;
