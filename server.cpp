@@ -45,8 +45,9 @@ public:
     ORServiceImpl(){
         mongocxx::instance inst{};
         conn = mongocxx::uri{};
-        transac_coll = conn[BDD][TRANSACTION_COLLECTION];
-        fitness_coll = conn[BDD][FITNESS_COLLECTION];
+        mongocxx::database db = conn[BDD];
+        transac_coll = db[TRANSACTION_COLLECTION];
+        fitness_coll = db[FITNESS_COLLECTION];
     }
 
     /*
