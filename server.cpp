@@ -91,13 +91,44 @@ public:
         reply->set_id(request->id());
         reply->set_solution(getNeighbourSolution(request->solution()));
 
-        // save data in mongodb
-        bsoncxx::builder::stream::document document{};
-        document << "transaction_id" << request->id();
-        document << "solution" << request->solution();
-        document << "fitness" << request->fitness();
+        // save data in mongodb if it is a better solution (Hill Climber First Improvement)
+        bsoncxx::builder::stream::document documentFitnessToSearch{};
+        documentFitnessToSearch << "transaction_id" << request->id() << bsoncxx::builder::stream::finalize;
+        mongocxx::stdx::optional<bsoncxx::document::value> view = transac_coll.find_one(documentFitnessToSearch.view());
+        if(view) {
+            bsoncxx::document::view vtmp = *view;
+            bsoncxx::document::element elt= vtmp["best_fitness_id"];
+            std::string idBestFitness = elt.get_oid().value.to_string();
 
-        fitness_coll.insert_one(document.view());
+
+            // Create the query filter
+            auto filter = bsoncxx::builder::stream::document{} ;
+            filter << "transaction_id" << request->id();
+
+            // Create the find options with the projection
+            auto docOpts = bsoncxx::builder::stream::document{};
+            docOpts << "_id" << idBestFitness << bsoncxx::builder::stream::finalize;
+            mongocxx::options::find opts{};
+            opts.projection(docOpts.view());
+
+            auto doc = fitness_coll.find_one(filter.view(), opts);
+            auto bestFitness = doc.value().view()["fitness"].get_double().value;
+
+            if(bestFitness > request->fitness()){
+                std::cout << bestFitness <<">"<<request->fitness() <<std::endl;
+                bsoncxx::builder::stream::document documentFitnessToInsert{};
+                documentFitnessToInsert << "transaction_id" << request->id();
+                documentFitnessToInsert << "solution" << request->solution();
+                documentFitnessToInsert << "fitness" << request->fitness();
+
+                fitness_coll.insert_one(documentFitnessToInsert.view());
+            }
+
+
+
+        } else{
+            return Status::CANCELLED;
+        }
 
         return Status::OK;
     }
