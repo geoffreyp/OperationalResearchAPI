@@ -142,10 +142,30 @@ public:
     Status StopConversation(ServerContext* context, const StopRequest* request,
                        StopResponse* reply) override{
         if(request->message() == "done"){
-            auto filter = bsoncxx::builder::stream::document{} ;
-            filter << "transaction_id" << request->id();
-            auto documentTransaction = transac_coll.find_one(filter.view());
+            auto filterTransactionId = bsoncxx::builder::stream::document{} ;
+            filterTransactionId << "transaction_id" << request->id();
+            auto documentTransaction = transac_coll.find_one(filterTransactionId.view());
+
+            bsoncxx::document::view vtmp = *documentTransaction;
+            bsoncxx::document::element elt= vtmp["best_fitness_id"];
+            std::string idBestFitness = elt.get_oid().value.to_string();
+
+            auto docOpts = bsoncxx::builder::stream::document{};
+            docOpts << "_id" << idBestFitness << bsoncxx::builder::stream::finalize;
+            mongocxx::options::find opts{};
+            opts.projection(docOpts.view());
+
+            auto documentFitness = fitness_coll.find_one(filterTransactionId.view(), opts);
+            bsoncxx::document::view viewFitness = *documentFitness;
+
+            reply->set_solution(viewFitness["solution"].get_utf8().value.to_string());
+            reply->set_fitness(viewFitness["fitness"].get_double());
+            reply->set_id(request->id());
+
+
         }
+
+        return Status::OK;
 
     }
 

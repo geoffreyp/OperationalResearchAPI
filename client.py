@@ -22,5 +22,10 @@ def run():
   print("Client received Id : " + response2.id)
   print("Client received Solution : " + response2.solution)
 
+  r3 = stub.StopConversation(api_pb2.StopRequest(id=response.id, message="done"))
+  print("Client received Id : " + r3.id)
+  print("Client received fitness : " + str(r3.fitness))
+  print("Client received last Solution : " + r3.solution)
+
 if __name__ == '__main__':
   run()
