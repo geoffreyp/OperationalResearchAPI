@@ -87,25 +87,28 @@ public:
     Status SendFitness(ServerContext* context, const FitnessRequest* request,
                             FitnessResponse* reply) override {
 
-        //set the response
+        /*
+         * set the response
+         */
         reply->set_id(request->id());
         reply->set_solution(getNeighbourSolution(request->solution()));
 
-        // save data in mongodb if it is a better solution (Hill Climber First Improvement)
+        /*
+         * save data in mongodb if it is a better solution (Hill Climber First Improvement)
+         */
+        // get the transaction
         bsoncxx::builder::stream::document documentFitnessToSearch{};
         documentFitnessToSearch << "transaction_id" << request->id() << bsoncxx::builder::stream::finalize;
         mongocxx::stdx::optional<bsoncxx::document::value> view = transac_coll.find_one(documentFitnessToSearch.view());
         if(view) {
+            // get the best fitness of the transaction
             bsoncxx::document::view vtmp = *view;
             bsoncxx::document::element elt= vtmp["best_fitness_id"];
             std::string idBestFitness = elt.get_oid().value.to_string();
 
-
-            // Create the query filter
             auto filter = bsoncxx::builder::stream::document{} ;
             filter << "transaction_id" << request->id();
 
-            // Create the find options with the projection
             auto docOpts = bsoncxx::builder::stream::document{};
             docOpts << "_id" << idBestFitness << bsoncxx::builder::stream::finalize;
             mongocxx::options::find opts{};
@@ -114,8 +117,8 @@ public:
             auto doc = fitness_coll.find_one(filter.view(), opts);
             auto bestFitness = doc.value().view()["fitness"].get_double().value;
 
+            // If the new fitness is better (Case of minimization) than the actual best fitness, then we replace the solution
             if(bestFitness > request->fitness()){
-
                 bsoncxx::builder::stream::document documentFitnessToInsert{};
                 documentFitnessToInsert << "transaction_id" << request->id();
                 documentFitnessToInsert << "solution" << request->solution();
@@ -123,15 +126,12 @@ public:
 
                 bsoncxx::types::value  newBestFitnessId = fitness_coll.insert_one(documentFitnessToInsert.view())->inserted_id();
 
-
                 transac_coll.update_one(
                         bsoncxx::builder::stream::document{} << "transaction_id" << request->id() <<   bsoncxx::builder::stream::finalize,
                         bsoncxx::builder::stream::document{} << "$set" <<  bsoncxx::builder::stream::open_document <<
                                                              "best_fitness_id" << newBestFitnessId.get_oid() <<
                                                              bsoncxx::builder::stream::close_document <<  bsoncxx::builder::stream::finalize
                 );
-
-
             }
 
         }
@@ -143,7 +143,7 @@ public:
 };
 
 /*
- * Run Server method
+ * Run Server function
  */
 void RunServer() {
     std::string server_address("0.0.0.0:50051");
