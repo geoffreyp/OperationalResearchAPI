@@ -115,19 +115,25 @@ public:
             auto bestFitness = doc.value().view()["fitness"].get_double().value;
 
             if(bestFitness > request->fitness()){
-                std::cout << bestFitness <<">"<<request->fitness() <<std::endl;
+
                 bsoncxx::builder::stream::document documentFitnessToInsert{};
                 documentFitnessToInsert << "transaction_id" << request->id();
                 documentFitnessToInsert << "solution" << request->solution();
                 documentFitnessToInsert << "fitness" << request->fitness();
 
-                fitness_coll.insert_one(documentFitnessToInsert.view());
+                bsoncxx::types::value  newBestFitnessId = fitness_coll.insert_one(documentFitnessToInsert.view())->inserted_id();
+
+
+                transac_coll.update_one(
+                        bsoncxx::builder::stream::document{} << "transaction_id" << request->id() <<   bsoncxx::builder::stream::finalize,
+                        bsoncxx::builder::stream::document{} << "$set" <<  bsoncxx::builder::stream::open_document <<
+                                                             "best_fitness_id" << newBestFitnessId.get_oid() <<
+                                                             bsoncxx::builder::stream::close_document <<  bsoncxx::builder::stream::finalize
+                );
+
+
             }
 
-
-
-        } else{
-            return Status::CANCELLED;
         }
 
         return Status::OK;
