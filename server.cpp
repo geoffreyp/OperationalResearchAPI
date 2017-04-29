@@ -139,6 +139,15 @@ public:
         return Status::OK;
     }
 
+    Status StopConversation(ServerContext* context, const StopRequest* request,
+                       StopResponse* reply) override{
+        if(request->message() == "done"){
+            auto filter = bsoncxx::builder::stream::document{} ;
+            filter << "transaction_id" << request->id();
+            auto documentTransaction = transac_coll.find_one(filter.view());
+        }
+
+    }
 
 };
 
