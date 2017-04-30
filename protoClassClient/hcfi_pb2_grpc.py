@@ -6,7 +6,7 @@ from grpc.framework.interfaces.face import utilities as face_utilities
 from . import hcfi_pb2 as hcfi__pb2
 
 
-class OperationalResearchStub(object):
+class HillClimberServiceStub(object):
 
   def __init__(self, channel):
     """Constructor.
@@ -15,23 +15,23 @@ class OperationalResearchStub(object):
       channel: A grpc.Channel.
     """
     self.InitTransaction = channel.unary_unary(
-        '/hcfi.OperationalResearch/InitTransaction',
+        '/hcfi.HillClimberService/InitTransaction',
         request_serializer=hcfi__pb2.InitTransactionRequest.SerializeToString,
         response_deserializer=hcfi__pb2.FitnessResponse.FromString,
         )
     self.SendFitness = channel.unary_unary(
-        '/hcfi.OperationalResearch/SendFitness',
+        '/hcfi.HillClimberService/SendFitness',
         request_serializer=hcfi__pb2.FitnessRequest.SerializeToString,
         response_deserializer=hcfi__pb2.FitnessResponse.FromString,
         )
     self.StopTransaction = channel.unary_unary(
-        '/hcfi.OperationalResearch/StopTransaction',
+        '/hcfi.HillClimberService/StopTransaction',
         request_serializer=hcfi__pb2.StopRequest.SerializeToString,
         response_deserializer=hcfi__pb2.StopResponse.FromString,
         )
 
 
-class OperationalResearchServicer(object):
+class HillClimberServiceServicer(object):
 
   def InitTransaction(self, request, context):
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -49,7 +49,7 @@ class OperationalResearchServicer(object):
     raise NotImplementedError('Method not implemented!')
 
 
-def add_OperationalResearchServicer_to_server(servicer, server):
+def add_HillClimberServiceServicer_to_server(servicer, server):
   rpc_method_handlers = {
       'InitTransaction': grpc.unary_unary_rpc_method_handler(
           servicer.InitTransaction,
@@ -68,5 +68,5 @@ def add_OperationalResearchServicer_to_server(servicer, server):
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(
-      'hcfi.OperationalResearch', rpc_method_handlers)
+      'hcfi.HillClimberService', rpc_method_handlers)
   server.add_generic_rpc_handlers((generic_handler,))

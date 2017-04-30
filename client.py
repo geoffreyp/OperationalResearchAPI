@@ -10,7 +10,7 @@ from protoClassClient import hcfi_pb2
 
 def run():
   channel = grpc.insecure_channel('0.0.0.0:50051')
-  stub = hcfi_pb2_grpc.OperationalResearchStub(channel)
+  stub = hcfi_pb2_grpc.HillClimberServiceStub(channel)
 
   print("Init the transaction : ")
   response = stub.InitTransaction(hcfi_pb2.InitTransactionRequest(customer='Florian', algorithm="hillclimber_first_improvement", solutionSize=5, fitness=100, solution='1-2-3-4-5'))

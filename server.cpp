@@ -30,7 +30,7 @@ using hcfi::StopResponse;
 /*
  * Implement Protobuf OperationalResearch Service
  */
-class ORServiceImpl final : public hcfi::OperationalResearch::Service {
+class HillClimberServiceImpl final : public hcfi::HillClimberService::Service {
 
 private:
     mongocxx::client conn;
@@ -42,7 +42,7 @@ public:
     /*
      * Constructor
      */
-    ORServiceImpl(){
+    HillClimberServiceImpl(){
         mongocxx::instance inst{};
         conn = mongocxx::uri{};
         mongocxx::database db = conn[BDD];
@@ -175,7 +175,7 @@ public:
  */
 void RunServer() {
     std::string server_address("0.0.0.0:50051");
-    ORServiceImpl service;
+    HillClimberServiceImpl service;
 
     ServerBuilder builder;
     builder.AddListeningPort(server_address, grpc::InsecureServerCredentials());

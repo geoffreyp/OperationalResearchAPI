@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='hcfi.proto',
   package='hcfi',
   syntax='proto3',
-  serialized_pb=_b('\n\nhcfi.proto\x12\x04hcfi\"v\n\x16InitTransactionRequest\x12\x10\n\x08\x63ustomer\x18\x01 \x01(\t\x12\x14\n\x0csolutionSize\x18\x02 \x01(\x05\x12\x0f\n\x07\x66itness\x18\x03 \x01(\x01\x12\x10\n\x08solution\x18\x04 \x01(\t\x12\x11\n\talgorithm\x18\x05 \x01(\t\"/\n\x0f\x46itnessResponse\x12\n\n\x02id\x18\x01 \x01(\t\x12\x10\n\x08solution\x18\x02 \x01(\t\"?\n\x0e\x46itnessRequest\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0f\n\x07\x66itness\x18\x02 \x01(\x01\x12\x10\n\x08solution\x18\x03 \x01(\t\"*\n\x0bStopRequest\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0f\n\x07message\x18\x02 \x01(\t\"=\n\x0cStopResponse\x12\n\n\x02id\x18\x01 \x01(\t\x12\x10\n\x08solution\x18\x02 \x01(\t\x12\x0f\n\x07\x66itness\x18\x03 \x01(\x01\x32\xd9\x01\n\x13OperationalResearch\x12H\n\x0fInitTransaction\x12\x1c.hcfi.InitTransactionRequest\x1a\x15.hcfi.FitnessResponse\"\x00\x12<\n\x0bSendFitness\x12\x14.hcfi.FitnessRequest\x1a\x15.hcfi.FitnessResponse\"\x00\x12:\n\x0fStopTransaction\x12\x11.hcfi.StopRequest\x1a\x12.hcfi.StopResponse\"\x00\x62\x06proto3')
+  serialized_pb=_b('\n\nhcfi.proto\x12\x04hcfi\"v\n\x16InitTransactionRequest\x12\x10\n\x08\x63ustomer\x18\x01 \x01(\t\x12\x14\n\x0csolutionSize\x18\x02 \x01(\x05\x12\x0f\n\x07\x66itness\x18\x03 \x01(\x01\x12\x10\n\x08solution\x18\x04 \x01(\t\x12\x11\n\talgorithm\x18\x05 \x01(\t\"/\n\x0f\x46itnessResponse\x12\n\n\x02id\x18\x01 \x01(\t\x12\x10\n\x08solution\x18\x02 \x01(\t\"?\n\x0e\x46itnessRequest\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0f\n\x07\x66itness\x18\x02 \x01(\x01\x12\x10\n\x08solution\x18\x03 \x01(\t\"*\n\x0bStopRequest\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0f\n\x07message\x18\x02 \x01(\t\"=\n\x0cStopResponse\x12\n\n\x02id\x18\x01 \x01(\t\x12\x10\n\x08solution\x18\x02 \x01(\t\x12\x0f\n\x07\x66itness\x18\x03 \x01(\x01\x32\xd8\x01\n\x12HillClimberService\x12H\n\x0fInitTransaction\x12\x1c.hcfi.InitTransactionRequest\x1a\x15.hcfi.FitnessResponse\"\x00\x12<\n\x0bSendFitness\x12\x14.hcfi.FitnessRequest\x1a\x15.hcfi.FitnessResponse\"\x00\x12:\n\x0fStopTransaction\x12\x11.hcfi.StopRequest\x1a\x12.hcfi.StopResponse\"\x00\x62\x06proto3')
 )
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -302,7 +302,7 @@ try:
   from grpc.beta import interfaces as beta_interfaces
 
 
-  class OperationalResearchStub(object):
+  class HillClimberServiceStub(object):
 
     def __init__(self, channel):
       """Constructor.
@@ -311,23 +311,23 @@ try:
         channel: A grpc.Channel.
       """
       self.InitTransaction = channel.unary_unary(
-          '/hcfi.OperationalResearch/InitTransaction',
+          '/hcfi.HillClimberService/InitTransaction',
           request_serializer=InitTransactionRequest.SerializeToString,
           response_deserializer=FitnessResponse.FromString,
           )
       self.SendFitness = channel.unary_unary(
-          '/hcfi.OperationalResearch/SendFitness',
+          '/hcfi.HillClimberService/SendFitness',
           request_serializer=FitnessRequest.SerializeToString,
           response_deserializer=FitnessResponse.FromString,
           )
       self.StopTransaction = channel.unary_unary(
-          '/hcfi.OperationalResearch/StopTransaction',
+          '/hcfi.HillClimberService/StopTransaction',
           request_serializer=StopRequest.SerializeToString,
           response_deserializer=StopResponse.FromString,
           )
 
 
-  class OperationalResearchServicer(object):
+  class HillClimberServiceServicer(object):
 
     def InitTransaction(self, request, context):
       context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -345,7 +345,7 @@ try:
       raise NotImplementedError('Method not implemented!')
 
 
-  def add_OperationalResearchServicer_to_server(servicer, server):
+  def add_HillClimberServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
         'InitTransaction': grpc.unary_unary_rpc_method_handler(
             servicer.InitTransaction,
@@ -364,11 +364,11 @@ try:
         ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-        'hcfi.OperationalResearch', rpc_method_handlers)
+        'hcfi.HillClimberService', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
 
-  class BetaOperationalResearchServicer(object):
+  class BetaHillClimberServiceServicer(object):
     """The Beta API is deprecated for 0.15.0 and later.
 
     It is recommended to use the GA API (classes and functions in this
@@ -382,7 +382,7 @@ try:
       context.code(beta_interfaces.StatusCode.UNIMPLEMENTED)
 
 
-  class BetaOperationalResearchStub(object):
+  class BetaHillClimberServiceStub(object):
     """The Beta API is deprecated for 0.15.0 and later.
 
     It is recommended to use the GA API (classes and functions in this
@@ -399,46 +399,46 @@ try:
     StopTransaction.future = None
 
 
-  def beta_create_OperationalResearch_server(servicer, pool=None, pool_size=None, default_timeout=None, maximum_timeout=None):
+  def beta_create_HillClimberService_server(servicer, pool=None, pool_size=None, default_timeout=None, maximum_timeout=None):
     """The Beta API is deprecated for 0.15.0 and later.
 
     It is recommended to use the GA API (classes and functions in this
     file not marked beta) for all further purposes. This function was
     generated only to ease transition from grpcio<0.15.0 to grpcio>=0.15.0"""
     request_deserializers = {
-      ('hcfi.OperationalResearch', 'InitTransaction'): InitTransactionRequest.FromString,
-      ('hcfi.OperationalResearch', 'SendFitness'): FitnessRequest.FromString,
-      ('hcfi.OperationalResearch', 'StopTransaction'): StopRequest.FromString,
+      ('hcfi.HillClimberService', 'InitTransaction'): InitTransactionRequest.FromString,
+      ('hcfi.HillClimberService', 'SendFitness'): FitnessRequest.FromString,
+      ('hcfi.HillClimberService', 'StopTransaction'): StopRequest.FromString,
     }
     response_serializers = {
-      ('hcfi.OperationalResearch', 'InitTransaction'): FitnessResponse.SerializeToString,
-      ('hcfi.OperationalResearch', 'SendFitness'): FitnessResponse.SerializeToString,
-      ('hcfi.OperationalResearch', 'StopTransaction'): StopResponse.SerializeToString,
+      ('hcfi.HillClimberService', 'InitTransaction'): FitnessResponse.SerializeToString,
+      ('hcfi.HillClimberService', 'SendFitness'): FitnessResponse.SerializeToString,
+      ('hcfi.HillClimberService', 'StopTransaction'): StopResponse.SerializeToString,
     }
     method_implementations = {
-      ('hcfi.OperationalResearch', 'InitTransaction'): face_utilities.unary_unary_inline(servicer.InitTransaction),
-      ('hcfi.OperationalResearch', 'SendFitness'): face_utilities.unary_unary_inline(servicer.SendFitness),
-      ('hcfi.OperationalResearch', 'StopTransaction'): face_utilities.unary_unary_inline(servicer.StopTransaction),
+      ('hcfi.HillClimberService', 'InitTransaction'): face_utilities.unary_unary_inline(servicer.InitTransaction),
+      ('hcfi.HillClimberService', 'SendFitness'): face_utilities.unary_unary_inline(servicer.SendFitness),
+      ('hcfi.HillClimberService', 'StopTransaction'): face_utilities.unary_unary_inline(servicer.StopTransaction),
     }
     server_options = beta_implementations.server_options(request_deserializers=request_deserializers, response_serializers=response_serializers, thread_pool=pool, thread_pool_size=pool_size, default_timeout=default_timeout, maximum_timeout=maximum_timeout)
     return beta_implementations.server(method_implementations, options=server_options)
 
 
-  def beta_create_OperationalResearch_stub(channel, host=None, metadata_transformer=None, pool=None, pool_size=None):
+  def beta_create_HillClimberService_stub(channel, host=None, metadata_transformer=None, pool=None, pool_size=None):
     """The Beta API is deprecated for 0.15.0 and later.
 
     It is recommended to use the GA API (classes and functions in this
     file not marked beta) for all further purposes. This function was
     generated only to ease transition from grpcio<0.15.0 to grpcio>=0.15.0"""
     request_serializers = {
-      ('hcfi.OperationalResearch', 'InitTransaction'): InitTransactionRequest.SerializeToString,
-      ('hcfi.OperationalResearch', 'SendFitness'): FitnessRequest.SerializeToString,
-      ('hcfi.OperationalResearch', 'StopTransaction'): StopRequest.SerializeToString,
+      ('hcfi.HillClimberService', 'InitTransaction'): InitTransactionRequest.SerializeToString,
+      ('hcfi.HillClimberService', 'SendFitness'): FitnessRequest.SerializeToString,
+      ('hcfi.HillClimberService', 'StopTransaction'): StopRequest.SerializeToString,
     }
     response_deserializers = {
-      ('hcfi.OperationalResearch', 'InitTransaction'): FitnessResponse.FromString,
-      ('hcfi.OperationalResearch', 'SendFitness'): FitnessResponse.FromString,
-      ('hcfi.OperationalResearch', 'StopTransaction'): StopResponse.FromString,
+      ('hcfi.HillClimberService', 'InitTransaction'): FitnessResponse.FromString,
+      ('hcfi.HillClimberService', 'SendFitness'): FitnessResponse.FromString,
+      ('hcfi.HillClimberService', 'StopTransaction'): StopResponse.FromString,
     }
     cardinalities = {
       'InitTransaction': cardinality.Cardinality.UNARY_UNARY,
@@ -446,7 +446,7 @@ try:
       'StopTransaction': cardinality.Cardinality.UNARY_UNARY,
     }
     stub_options = beta_implementations.stub_options(host=host, metadata_transformer=metadata_transformer, request_serializers=request_serializers, response_deserializers=response_deserializers, thread_pool=pool, thread_pool_size=pool_size)
-    return beta_implementations.dynamic_stub(channel, 'hcfi.OperationalResearch', cardinalities, options=stub_options)
+    return beta_implementations.dynamic_stub(channel, 'hcfi.HillClimberService', cardinalities, options=stub_options)
 except ImportError:
   pass
 # @@protoc_insertion_point(module_scope)
