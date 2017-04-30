@@ -6,7 +6,7 @@
  - [MongoDB](https://www.mongodb.com/download-center#community)
  - [MongoDB driver for C++](https://mongodb.github.io/mongo-cxx-driver/mongocxx-v3/installation/)
  
-## Build from Source
+## Build the server from Source
 
 ``` git clone git@github.com:geoffreyp/OperationalResearchWebAPI.git```
 
@@ -17,3 +17,16 @@
 ``` cmake ..```
 
 ``` make```
+
+
+## Run the server 
+``` ./build/server ```
+
+
+## Build the client
+
+``` python -m grpc_tools.protoc -I=./protos --python_out=./protoClassClient --grpc_python_out=./protoClassClient ./protos/hcfi.proto ```
+
+
+## Run the  client 
+``` python client.py ```
