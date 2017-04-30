@@ -11,3 +11,7 @@ client
 
 # Python
 *.pyc
+
+# Protobuff
+protoClassServer
+*_pb2*

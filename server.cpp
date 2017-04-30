@@ -21,7 +21,7 @@ using grpc::Server;
 using grpc::ServerBuilder;
 using grpc::ServerContext;
 using grpc::Status;
-using hcfi::InitRequest;
+using hcfi::InitTransactionRequest;
 using hcfi::FitnessResponse;
 using hcfi::FitnessRequest;
 using hcfi::StopRequest;
@@ -53,7 +53,7 @@ public:
     /*
      * Implement ProtoBuff Rpc Methods
      */
-    Status InitConversation(ServerContext* context, const InitRequest* request,
+    Status InitTransaction(ServerContext* context, const InitTransactionRequest* request,
                     FitnessResponse* reply) override {
 
         std::string _id(generateId());
@@ -139,7 +139,7 @@ public:
         return Status::OK;
     }
 
-    Status StopConversation(ServerContext* context, const StopRequest* request,
+    Status StopTransaction(ServerContext* context, const StopRequest* request,
                        StopResponse* reply) override{
         if(request->message() == "done"){
             auto filterTransactionId = bsoncxx::builder::stream::document{} ;

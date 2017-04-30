@@ -3,12 +3,12 @@ syntax = "proto3";
 package hcfi;
 
 service OperationalResearch {
-    rpc InitConversation (InitRequest) returns (FitnessResponse) {}
+    rpc InitTransaction (InitTransactionRequest) returns (FitnessResponse) {}
     rpc SendFitness (FitnessRequest) returns (FitnessResponse) {}
-    rpc StopConversation (StopRequest) returns (StopResponse) {}
+    rpc StopTransaction (StopRequest) returns (StopResponse) {}
 }
 
-message InitRequest {
+message InitTransactionRequest {
     string customer = 1;
     int32 solutionSize = 2;
     double fitness = 3;
