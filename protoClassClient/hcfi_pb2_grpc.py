@@ -3,7 +3,7 @@ import grpc
 from grpc.framework.common import cardinality
 from grpc.framework.interfaces.face import utilities as face_utilities
 
-from . import api_pb2 as api__pb2
+from . import hcfi_pb2 as hcfi__pb2
 
 
 class OperationalResearchStub(object):
@@ -15,19 +15,19 @@ class OperationalResearchStub(object):
       channel: A grpc.Channel.
     """
     self.InitConversation = channel.unary_unary(
-        '/api.OperationalResearch/InitConversation',
-        request_serializer=api__pb2.InitRequest.SerializeToString,
-        response_deserializer=api__pb2.FitnessResponse.FromString,
+        '/hcfi.OperationalResearch/InitConversation',
+        request_serializer=hcfi__pb2.InitRequest.SerializeToString,
+        response_deserializer=hcfi__pb2.FitnessResponse.FromString,
         )
     self.SendFitness = channel.unary_unary(
-        '/api.OperationalResearch/SendFitness',
-        request_serializer=api__pb2.FitnessRequest.SerializeToString,
-        response_deserializer=api__pb2.FitnessResponse.FromString,
+        '/hcfi.OperationalResearch/SendFitness',
+        request_serializer=hcfi__pb2.FitnessRequest.SerializeToString,
+        response_deserializer=hcfi__pb2.FitnessResponse.FromString,
         )
     self.StopConversation = channel.unary_unary(
-        '/api.OperationalResearch/StopConversation',
-        request_serializer=api__pb2.StopRequest.SerializeToString,
-        response_deserializer=api__pb2.StopResponse.FromString,
+        '/hcfi.OperationalResearch/StopConversation',
+        request_serializer=hcfi__pb2.StopRequest.SerializeToString,
+        response_deserializer=hcfi__pb2.StopResponse.FromString,
         )
 
 
@@ -53,20 +53,20 @@ def add_OperationalResearchServicer_to_server(servicer, server):
   rpc_method_handlers = {
       'InitConversation': grpc.unary_unary_rpc_method_handler(
           servicer.InitConversation,
-          request_deserializer=api__pb2.InitRequest.FromString,
-          response_serializer=api__pb2.FitnessResponse.SerializeToString,
+          request_deserializer=hcfi__pb2.InitRequest.FromString,
+          response_serializer=hcfi__pb2.FitnessResponse.SerializeToString,
       ),
       'SendFitness': grpc.unary_unary_rpc_method_handler(
           servicer.SendFitness,
-          request_deserializer=api__pb2.FitnessRequest.FromString,
-          response_serializer=api__pb2.FitnessResponse.SerializeToString,
+          request_deserializer=hcfi__pb2.FitnessRequest.FromString,
+          response_serializer=hcfi__pb2.FitnessResponse.SerializeToString,
       ),
       'StopConversation': grpc.unary_unary_rpc_method_handler(
           servicer.StopConversation,
-          request_deserializer=api__pb2.StopRequest.FromString,
-          response_serializer=api__pb2.StopResponse.SerializeToString,
+          request_deserializer=hcfi__pb2.StopRequest.FromString,
+          response_serializer=hcfi__pb2.StopResponse.SerializeToString,
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(
-      'api.OperationalResearch', rpc_method_handlers)
+      'hcfi.OperationalResearch', rpc_method_handlers)
   server.add_generic_rpc_handlers((generic_handler,))

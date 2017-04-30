@@ -23,7 +23,7 @@ include_directories("/usr/local/include/grpc")
 include_directories("/usr/local/lib")
 
 set(PROTOS
-        ${CMAKE_CURRENT_SOURCE_DIR}/protos/api.proto
+        ${CMAKE_CURRENT_SOURCE_DIR}/protos/hcfi.proto
         )
 
 set(PROTO_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/protoClassServer)

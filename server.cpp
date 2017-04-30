@@ -10,7 +10,7 @@
 #ifdef BAZEL_BUILD
 #include "protos/api.proto"
 #else
-#include "protoClassServer/api.grpc.pb.h"
+#include "protoClassServer/hcfi.grpc.pb.h"
 #endif
 
 #define BDD "api"
@@ -21,16 +21,16 @@ using grpc::Server;
 using grpc::ServerBuilder;
 using grpc::ServerContext;
 using grpc::Status;
-using api::InitRequest;
-using api::FitnessResponse;
-using api::FitnessRequest;
-using api::StopRequest;
-using api::StopResponse;
+using hcfi::InitRequest;
+using hcfi::FitnessResponse;
+using hcfi::FitnessRequest;
+using hcfi::StopRequest;
+using hcfi::StopResponse;
 
 /*
  * Implement Protobuf OperationalResearch Service
  */
-class ORServiceImpl final : public api::OperationalResearch::Service {
+class ORServiceImpl final : public hcfi::OperationalResearch::Service {
 
 private:
     mongocxx::client conn;

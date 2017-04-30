@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package api;
+package hcfi;
 
 service OperationalResearch {
     rpc InitConversation (InitRequest) returns (FitnessResponse) {}
