@@ -150,12 +150,11 @@ public:
             bsoncxx::document::element elt= vtmp["best_fitness_id"];
             std::string idBestFitness = elt.get_oid().value.to_string();
 
-            auto docOpts = bsoncxx::builder::stream::document{};
-            docOpts << "_id" << idBestFitness << bsoncxx::builder::stream::finalize;
-            mongocxx::options::find opts{};
-            opts.projection(docOpts.view());
 
-            auto documentFitness = fitness_coll.find_one(filterTransactionId.view(), opts);
+            auto filterId = bsoncxx::builder::stream::document{} ;
+            filterId << "_id" << elt.get_oid();
+
+            auto documentFitness = fitness_coll.find_one(filterId.view());
             bsoncxx::document::view viewFitness = *documentFitness;
 
             reply->set_solution(viewFitness["solution"].get_utf8().value.to_string());

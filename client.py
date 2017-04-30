@@ -17,11 +17,12 @@ def run():
   print("Client received Id : " + response.id)
   print("Client received Solution : " + response.solution)
 
-  print("Send fitness for the solution received : ")
+  print("\nSend fitness for the solution received : ")
   response2 = stub.SendFitness(api_pb2.FitnessRequest(id=response.id, fitness=10, solution=response.solution))
   print("Client received Id : " + response2.id)
   print("Client received Solution : " + response2.solution)
 
+  print("\nStop, claim the best solution found : ")
   r3 = stub.StopConversation(api_pb2.StopRequest(id=response.id, message="done"))
   print("Client received Id : " + r3.id)
   print("Client received fitness : " + str(r3.fitness))
