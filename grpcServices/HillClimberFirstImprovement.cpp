@@ -3,7 +3,7 @@
 
 HillClimberFirstImprovement::HillClimberFirstImprovement(){
     mongocxx::instance inst{};
-    conn = mongocxx::uri{};
+    conn = mongocxx::uri("mongodb://mongodb:27017");
     mongocxx::database db = conn[BDD];
     transac_coll = db[TRANSACTION_COLLECTION];
     fitness_coll = db[FITNESS_COLLECTION];
