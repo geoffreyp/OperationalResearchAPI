@@ -25,12 +25,12 @@
 
 
 ## Run with Docker
-# Download images
+### Download images
 ``` docker pull fvansteene/roapi ``` 
 
 ``` docker pull fvansteene/mongodb``` 
 
-# Run the databse server then the grpc server
+### Run the databse server then the grpc server
 ``` docker run -d -p 27017:27017 --name mongodb fvansteene/mongodb``` 
 
 ``` docker run -d -p 50051:50051 --link mongodb --name ros fvansteene/roapi```
