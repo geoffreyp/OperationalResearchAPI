@@ -23,10 +23,16 @@
 ``` ./build/server ```
 
 
-## Build the client
 
-``` python -m grpc_tools.protoc -I=./protos --python_out=./protoClassClient --grpc_python_out=./protoClassClient ./protos/hcfi.proto ```
+## Run with Docker
+# Download images
+``` docker pull fvansteene/roapi ``` 
 
+``` docker pull fvansteene/mongodb``` 
 
-## Run the  client 
-``` python client.py ```
+# Run the databse server then the grpc server
+``` docker run -d -p 27017:27017 --name mongodb fvansteene/mongodb``` 
+
+``` docker run -d -p 50051:50051 --link mongodb --name ros fvansteene/roapi```
+
+You can now connect your own client to the API :)
