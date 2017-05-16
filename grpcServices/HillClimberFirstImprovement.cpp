@@ -26,6 +26,7 @@ Status HillClimberFirstImprovement::InitTransaction(ServerContext* context, cons
     documentTransaction << "customer" << request->customer();
     documentTransaction << "solution_initial" << request->solution();
     documentTransaction << "solution_size" << request->solutionsize();
+    documentTransaction << "type" << request->type();
 
 
     bsoncxx::builder::stream::document documentFitness{};
