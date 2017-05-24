@@ -46,11 +46,6 @@ Status HillClimberFirstImprovement::InitTransaction(ServerContext* context, cons
 Status HillClimberFirstImprovement::SendFitness(ServerContext* context, const FitnessRequest* request,
                    FitnessResponse* reply) {
 
-    /*
-     * set the response
-     */
-    reply->set_id(request->id());
-    reply->set_solution(getNeighbourSolution(request->solution()));
 
     /*
      * save data in mongodb if it is a better solution (Hill Climber First Improvement)
@@ -73,8 +68,13 @@ Status HillClimberFirstImprovement::SendFitness(ServerContext* context, const Fi
         mongocxx::options::find opts{};
         opts.projection(docOpts.view());
 
-        auto doc = fitness_coll.find_one(filter.view(), opts);
-        auto bestFitness = doc.value().view()["fitness"].get_double().value;
+        auto docFitnessFindOne = fitness_coll.find_one(filter.view(), opts);
+        auto bestFitness = docFitnessFindOne.value().view()["fitness"].get_double().value;
+
+      //  std::cout << "best fitness : " << bestFitness << std::endl << std::endl;
+        auto bestSolution = docFitnessFindOne.value().view()["solution"].get_utf8().value.to_string();
+
+      //  std::cout << "best solution : " << bestSolution << std::endl << std::endl;
 
         // If the new fitness is better (Case of minimization) than the actual best fitness, then we replace the solution
         if(bestFitness > request->fitness()){
@@ -83,6 +83,7 @@ Status HillClimberFirstImprovement::SendFitness(ServerContext* context, const Fi
             documentFitnessToInsert << "solution" << request->solution();
             documentFitnessToInsert << "fitness" << request->fitness();
 
+            bestSolution = request->solution();
             bsoncxx::types::value  newBestFitnessId = fitness_coll.insert_one(documentFitnessToInsert.view())->inserted_id();
 
             transac_coll.update_one(
@@ -93,7 +94,13 @@ Status HillClimberFirstImprovement::SendFitness(ServerContext* context, const Fi
             );
         }
 
+        /*
+         * set the response
+         */
+        reply->set_id(request->id());
+        reply->set_solution(getNeighbourSolution(bestSolution));
     }
+
 
     return Status::OK;
 }
