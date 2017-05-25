@@ -15,15 +15,26 @@ std::string generateId(){
 };
 
 std::string getNeighbourSolution(const std::string& solution){
+    // convert solution from string to vector
     std::vector< std::string> v{explode(solution, '-')};
-    std::random_shuffle (v.begin(), v.end());
 
-    std::string neighbour = "";
-    for(auto n:v){
-        neighbour = neighbour + n + "-";
-    }
-    neighbour.pop_back();
-    return  neighbour;
+    // swap 2 elements
+    std::random_device rd;
+    std::mt19937 rng(rd());    // random-number engine used Mersenne-Twister
+    std::uniform_int_distribution<int> uni(0, (int) v.size() - 1);
+    auto random_integer1 = uni(rng);
+    auto random_integer2 = uni(rng);
+
+    std::string str_tmp = v[random_integer1];
+    v[random_integer1] = v[random_integer2];
+    v[random_integer2] = str_tmp;
+
+    // convert solution from vector to string
+    std::ostringstream oss;
+    std::copy(v.begin(), v.end()-1, std::ostream_iterator<std::string>(oss, "-"));
+    oss << v.back();
+
+    return  oss.str();
 }
 
 const std::vector<std::string> explode(const std::string& s, const char& c)

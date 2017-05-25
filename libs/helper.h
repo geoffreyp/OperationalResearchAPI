@@ -8,6 +8,9 @@
 #include <string>
 #include <iostream>
 #include <algorithm>
+#include <sstream>
+#include <iterator>
+#include <iostream>
 
 std::string generateId();
 std::string getNeighbourSolution(const std::string& solution);
