@@ -16,7 +16,7 @@
 
 #define BDD "api"
 #define TRANSACTION_COLLECTION "transactions"
-#define FITNESS_COLLECTION "fitness"
+#define FITNESS_COLLECTION "fitnesses"
 
 using grpc::Server;
 using grpc::ServerBuilder;
