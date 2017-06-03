@@ -111,13 +111,16 @@ Status HillClimberFirstImprovement::StopTransaction(ServerContext* context, cons
                        StopResponse* reply){
     if(request->message() == "done"){
         auto filterTransactionId = bsoncxx::builder::stream::document{} ;
-        filterTransactionId << "transaction_id" << request->id();
+        filterTransactionId << "_id" <<  bsoncxx::oid(request->id());
+
         auto documentTransaction = transac_coll.find_one(filterTransactionId.view());
 
         bsoncxx::document::view vtmp = *documentTransaction;
         bsoncxx::document::element elt= vtmp["best_fitness_id"];
         std::string idBestFitness = elt.get_oid().value.to_string();
 
+        std::cout<< "StopTransaction__ transaction Id ::::: " <<  request->id() << std::endl;
+        std::cout<< "StopTransaction__ best fitnessId ::::: " << idBestFitness << std::endl;
 
         auto filterId = bsoncxx::builder::stream::document{} ;
         filterId << "_id" << elt.get_oid();
