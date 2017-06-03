@@ -22,6 +22,8 @@ Status HillClimberFirstImprovement::InitTransaction(ServerContext* context, cons
     documentTransaction << "solution_size" << request->solutionsize();
     documentTransaction << "type" << request->type();
     documentTransaction << "algorithm" << request->algorithm();
+    std::chrono::system_clock::time_point now = std::chrono::system_clock::now();
+    documentTransaction << "created_at" << bsoncxx::types::b_date(now);
     bsoncxx::types::value  transactionId = transac_coll.insert_one(documentTransaction.view())->inserted_id();
 
 
