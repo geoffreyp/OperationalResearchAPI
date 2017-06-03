@@ -43,7 +43,7 @@ Status HillClimberFirstImprovement::InitTransaction(ServerContext* context, cons
     // set the response
     reply->set_id(transactionId.get_oid().value.to_string());
     reply->set_solution(getNeighbourSolution(request->solution()));
-    return Status::CANCELLED;
+    return Status::OK;
 }
 Status HillClimberFirstImprovement::SendFitness(ServerContext* context, const FitnessRequest* request,
                    FitnessResponse* reply) {
