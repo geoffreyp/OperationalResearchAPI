@@ -14,35 +14,37 @@ HillClimberFirstImprovement::HillClimberFirstImprovement(){
 Status HillClimberFirstImprovement::InitTransaction(ServerContext* context, const InitTransactionRequest* request,
                        FitnessResponse* reply) {
 
-    std::string _id(generateId());
-
-    // set the response
-    reply->set_id(_id);
-    reply->set_solution(getNeighbourSolution(request->solution()));
 
     // save data in mongodb
     bsoncxx::builder::stream::document documentTransaction{};
-    documentTransaction << "transaction_id" << _id;
     documentTransaction << "customer" << request->customer();
     documentTransaction << "solution_initial" << request->solution();
     documentTransaction << "solution_size" << request->solutionsize();
     documentTransaction << "type" << request->type();
+    documentTransaction << "algorithm" << request->algorithm();
+    bsoncxx::types::value  transactionId = transac_coll.insert_one(documentTransaction.view())->inserted_id();
 
 
     bsoncxx::builder::stream::document documentFitness{};
-    documentFitness << "transaction_id" << _id;
+    documentFitness << "transaction_id" << transactionId;
     documentFitness << "solution" << request->solution();
     documentFitness << "fitness" << request->fitness();
     bsoncxx::types::value  fitnessId = fitness_coll.insert_one(documentFitness.view())->inserted_id();
 
-    documentTransaction << "best_fitness_id" << fitnessId;
-    documentTransaction << "algorithm" << request->algorithm();
-    transac_coll.insert_one(documentTransaction.view());
 
-    return Status::OK;
+    transac_coll.update_one(
+            bsoncxx::builder::stream::document{} << "_id" << transactionId <<   bsoncxx::builder::stream::finalize,
+            bsoncxx::builder::stream::document{} << "$set" <<  bsoncxx::builder::stream::open_document <<
+                                                 "best_fitness_id" << fitnessId <<
+                                                 bsoncxx::builder::stream::close_document <<  bsoncxx::builder::stream::finalize
+    );
+
+
+    // set the response
+    reply->set_id(transactionId.get_oid().value.to_string());
+    reply->set_solution(getNeighbourSolution(request->solution()));
+    return Status::CANCELLED;
 }
-
-
 Status HillClimberFirstImprovement::SendFitness(ServerContext* context, const FitnessRequest* request,
                    FitnessResponse* reply) {
 
