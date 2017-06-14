@@ -22,12 +22,12 @@ include_directories("/usr/local/include/libbson-1.0")
 include_directories("/usr/local/include/grpc")
 include_directories("/usr/local/lib")
 
-set(PROTO_FILE_HCFI ${CMAKE_CURRENT_SOURCE_DIR}/protos/hcfi.proto)
 
 set(PROTO_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/protoClassServer)
 file(MAKE_DIRECTORY ${PROTO_SRC_DIR})
 include_directories(${PROTO_SRC_DIR})
 
+set(PROTO_FILE_HCFI ${CMAKE_CURRENT_SOURCE_DIR}/protos/hcfi.proto)
 protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS ${PROTO_SRC_DIR} ${PROTO_FILE_HCFI})
 grpc_generate_cpp(GRPC_SRCS GRPC_HDRS ${PROTO_SRC_DIR} ${PROTO_FILE_HCFI})
 
