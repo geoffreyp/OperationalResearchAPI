@@ -1,9 +1,10 @@
+# Init the project
 cmake_minimum_required(VERSION 3.7)
 project(OperationalResearchApi)
 
 add_compile_options(-std=c++11)
 
-# GRPC and Protocol Buffers libraries location
+# Add GRPC and Protocol Buffers libraries location
 list(APPEND CMAKE_PREFIX_PATH "/usr/local/include/grpc" "/usr/local/include/protobuf")
 
 # Cmake find modules
@@ -22,19 +23,21 @@ include_directories("/usr/local/include/libbson-1.0")
 include_directories("/usr/local/include/grpc")
 include_directories("/usr/local/lib")
 
-
+# Add the destination of the protobuf generated files
 set(PROTO_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/protoClassServer)
 file(MAKE_DIRECTORY ${PROTO_SRC_DIR})
 include_directories(${PROTO_SRC_DIR})
 
+# Add protobuf files
 set(PROTO_FILE_HCFI ${CMAKE_CURRENT_SOURCE_DIR}/protos/hcfi.proto)
 protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS ${PROTO_SRC_DIR} ${PROTO_FILE_HCFI})
 grpc_generate_cpp(GRPC_SRCS GRPC_HDRS ${PROTO_SRC_DIR} ${PROTO_FILE_HCFI})
 
-
+# Add libs & helpers
 file(GLOB LIBS_H_SRC libs/*.h)
 file(GLOB LIBS_CPP_SRC libs/*.cpp)
 
+# Add services
 file(GLOB GRPC_SERVICES_H_SRC grpcServices/*.h)
 file(GLOB GRPC_SERVICES_CPP_SRC grpcServices/*.cpp)
 
