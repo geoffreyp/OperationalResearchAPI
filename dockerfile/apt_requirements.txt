@@ -1,0 +1,13 @@
+build-essential
+autoconf
+automake
+libtool
+curl
+make
+g++
+unzip
+git
+libmongoc-1.0-0
+pkg-config
+libssl-dev
+libsasl2-dev
