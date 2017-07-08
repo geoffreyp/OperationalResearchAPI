@@ -58,4 +58,21 @@ target_link_libraries(server
 target_link_libraries(server ${LIBMONGOCXX_LIBRARIES})
 target_link_libraries(server ${LIBBSONCXX_LIBRARIES})
 
+# Building server_async
+add_executable(server_async
+        ${CMAKE_CURRENT_SOURCE_DIR}/server_async.cpp
+        ${PROTO_SRCS}
+        ${GRPC_SRCS}
+        ${LIBS_H_SRC}
+        ${LIBS_CPP_SRC}
+        ${GRPC_SERVICES_H_SRC}
+        ${GRPC_SERVICES_CPP_SRC})
+target_link_libraries(server_async
+        gRPC::grpc++_reflection
+        protobuf::libprotobuf
+        )
+
+target_link_libraries(server_async ${LIBMONGOCXX_LIBRARIES})
+target_link_libraries(server_async ${LIBBSONCXX_LIBRARIES})
+
 link_libraries(OperationalResearchApi ${LIBBSONCXX_LIBRARIES})

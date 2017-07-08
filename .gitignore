@@ -6,8 +6,8 @@ cmake-build-debug
 *.o
 
 # Executable
-server
-client
+build/server
+build/server_async
 
 # Python
 *.pyc
