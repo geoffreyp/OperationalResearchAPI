@@ -2,10 +2,7 @@
 #include <iostream>
 #include <thread>
 
-#include <grpc++/grpc++.h>
-#include <grpc/support/log.h>
-
-#include "hcfi.grpc.pb.h"
+#include "grpcCallData/HCInitTransaction.h"
 
 using grpc::Server;
 using grpc::ServerAsyncResponseWriter;
@@ -39,48 +36,11 @@ public:
     }
 
 private:
-    class CallData {
-    public:
-        CallData(HillClimberService::AsyncService* service, ServerCompletionQueue* cq)
-                : service_(service), cq_(cq), responder_(&ctx_), status_(CREATE) {
-            proceed();
-        }
-
-        void proceed() {
-            if (status_ == CREATE) {
-                status_ = PROCESS;
-                service_->RequestInitTransaction(&ctx_, &request_, &responder_, cq_, cq_, this);
-            } else if (status_ == PROCESS) {
-                new CallData(service_, cq_); // Spawn a new CallData instance to serve new clients
-
-                reply_.set_id("new_id");
-                reply_.set_solution("new_solution");
-
-                status_ = FINISH;
-                responder_.Finish(reply_, Status::OK, this);
-            } else {
-                GPR_ASSERT(status_ == FINISH);
-                delete this;  // Once in the FINISH state, deallocate actual CallData.
-            }
-        }
-
-    private:
-        HillClimberService::AsyncService* service_;
-        ServerCompletionQueue* cq_;
-        ServerContext ctx_;
-
-        InitTransactionRequest request_; // What we get from the client.
-        FitnessResponse reply_; // What we send back to the client.
-
-        ServerAsyncResponseWriter<FitnessResponse> responder_;
-        enum CallStatus { CREATE, PROCESS, FINISH };
-        CallStatus status_;  // The current serving state.
-    };
 
     // This can be run in multiple threads if needed.
     void handleRpcs() {
 
-        new CallData(&service_, cq_.get()); // Spawn a new CallData instance to serve new clients.
+        new HCInitTransaction(&service_, cq_.get()); // Spawn a new CallData instance to serve new clients.
         void* tag;
         bool ok;
         while (true) {
