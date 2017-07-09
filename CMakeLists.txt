@@ -42,8 +42,8 @@ file(GLOB GRPC_SERVICES_H_SRC grpcServices/*.h)
 file(GLOB GRPC_SERVICES_CPP_SRC grpcServices/*.cpp)
 
 # Add grpcCallData
-file(GLOB GRPC_CALL_DATA_H grpcCallData/*.h)
-file(GLOB GRPC_CALL_DATA_CPP grpcCallData/*.cpp)
+file(GLOB GRPC_CALL_DATA_H grpcCallData/*/*.h)
+file(GLOB GRPC_CALL_DATA_CPP grpcCallData/*/*.cpp)
 
 # Building server
 add_executable(server
@@ -71,6 +71,8 @@ add_executable(server_async
         ${LIBS_CPP_SRC}
         ${GRPC_SERVICES_H_SRC}
         ${GRPC_SERVICES_CPP_SRC}
+        ${CMAKE_CURRENT_SOURCE_DIR}/grpcCallData/CallData.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/grpcCallData/CallData.cpp
         ${GRPC_CALL_DATA_H}
         ${GRPC_CALL_DATA_CPP})
 target_link_libraries(server_async

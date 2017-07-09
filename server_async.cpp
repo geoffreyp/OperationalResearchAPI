@@ -2,7 +2,7 @@
 #include <iostream>
 #include <thread>
 
-#include "grpcCallData/HCInitTransaction.h"
+#include "grpcCallData/HillClimberFI/HCInitTransaction.h"
 
 using grpc::Server;
 using grpc::ServerAsyncResponseWriter;
