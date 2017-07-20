@@ -1,3 +1,5 @@
+wget
+git
 build-essential
 autoconf
 automake
@@ -6,7 +8,6 @@ curl
 make
 g++
 unzip
-git
 libmongoc-1.0-0
 pkg-config
 libssl-dev
