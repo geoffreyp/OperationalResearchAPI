@@ -3,6 +3,7 @@
 #include <thread>
 
 #include "grpcCallData/HillClimberFI/HCInitTransaction.h"
+#include "grpcCallData/HillClimberFI/HCFitnessTransaction.h"
 #include "grpcCallData/HillClimberFI/HCStopTransaction.h"
 
 using grpc::Server;
@@ -42,6 +43,7 @@ private:
     void handleRpcs() {
 
         new HCInitTransaction(&service_, cq_.get()); // Spawn a new CallData instance to serve new clients.
+        new HCFitnessTransaction(&service_, cq_.get());
         new HCStopTransaction(&service_, cq_.get());
         void* tag;
         bool ok;
