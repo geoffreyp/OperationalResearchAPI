@@ -2,7 +2,7 @@
 #define OPERATIONALRESEARCHAPI_HCINITTRANSACTION_H
 
 
-#include "../CallData.h"
+#include "HCBase.h"
 
 using grpc::Server;
 using grpc::ServerAsyncResponseWriter;
@@ -13,14 +13,13 @@ using grpc::Status;
 using hcfi::InitTransactionRequest;
 using hcfi::FitnessResponse;
 
-class HCInitTransaction : public CallData{
+class HCInitTransaction : public HCBase{
 
 public:
-    HCInitTransaction(HillClimberService::AsyncService* service, ServerCompletionQueue* cq);
+    HCInitTransaction(HillClimberService::AsyncService* service, ServerCompletionQueue* cq, mongocxx::database db);
     void Process() override ;
 
 private:
-    ServerContext ctx_;
     InitTransactionRequest request_;
     FitnessResponse reply_;
     ServerAsyncResponseWriter<FitnessResponse> responder_;

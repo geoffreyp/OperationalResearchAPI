@@ -6,6 +6,8 @@
 #include "grpcCallData/HillClimberFI/HCFitnessTransaction.h"
 #include "grpcCallData/HillClimberFI/HCStopTransaction.h"
 
+#define BDD "api"
+
 using grpc::Server;
 using grpc::ServerAsyncResponseWriter;
 using grpc::ServerBuilder;
@@ -18,6 +20,12 @@ using hcfi::HillClimberService;
 
 class ServerImpl final {
 public:
+    ServerImpl() {
+        mongocxx::instance inst{};
+        conn = mongocxx::uri("mongodb://127.0.0.1:27017");
+        db = conn[BDD];
+    }
+
     ~ServerImpl() {
         server_->Shutdown();
         cq_->Shutdown();
@@ -42,7 +50,7 @@ private:
     // This can be run in multiple threads if needed.
     void handleRpcs() {
 
-        new HCInitTransaction(&service_, cq_.get()); // Spawn a new CallData instance to serve new clients.
+        new HCInitTransaction(&service_, cq_.get(), db); // Spawn a new CallData instance to serve new clients.
         new HCFitnessTransaction(&service_, cq_.get());
         new HCStopTransaction(&service_, cq_.get());
         void* tag;
@@ -57,6 +65,9 @@ private:
     std::unique_ptr<ServerCompletionQueue> cq_;
     HillClimberService::AsyncService service_;
     std::unique_ptr<Server> server_;
+    mongocxx::client conn;
+    mongocxx::database db;
+
 };
 
 int main(int argc, char** argv) {
