@@ -52,7 +52,7 @@ private:
 
         new HCInitTransaction(&service_, cq_.get(), db); // Spawn a new CallData instance to serve new clients.
         new HCFitnessTransaction(&service_, cq_.get(), db);
-        new HCStopTransaction(&service_, cq_.get());
+        new HCStopTransaction(&service_, cq_.get(), db);
         void* tag;
         bool ok;
         while (true) {

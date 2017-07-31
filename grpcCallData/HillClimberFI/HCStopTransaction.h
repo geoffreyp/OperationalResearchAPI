@@ -2,7 +2,7 @@
 #define OPERATIONALRESEARCHAPI_HCSTOPTRANSACTION_H
 
 
-#include "../CallData.h"
+#include "HCBase.h"
 
 using grpc::Server;
 using grpc::ServerAsyncResponseWriter;
@@ -13,14 +13,13 @@ using grpc::Status;
 using hcfi::StopRequest;
 using hcfi::StopResponse;
 
-class HCStopTransaction : public CallData{
+class HCStopTransaction : public HCBase{
 
 public:
-    HCStopTransaction(HillClimberService::AsyncService* service, ServerCompletionQueue* cq);
+    HCStopTransaction(HillClimberService::AsyncService* service, ServerCompletionQueue* cq, mongocxx::database db);
     void Process() override ;
 
 private:
-    ServerContext ctx_;
     StopRequest request_;
     StopResponse reply_;
     ServerAsyncResponseWriter<StopResponse> responder_;
