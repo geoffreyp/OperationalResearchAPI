@@ -2,7 +2,7 @@
 #define OPERATIONALRESEARCHAPI_HCFITNESSTRANSACTION_H
 
 
-#include "../CallData.h"
+#include "HCBase.h"
 
 using grpc::Server;
 using grpc::ServerAsyncResponseWriter;
@@ -13,14 +13,13 @@ using grpc::Status;
 using hcfi::FitnessRequest;
 using hcfi::FitnessResponse;
 
-class HCFitnessTransaction : public CallData{
+class HCFitnessTransaction : public HCBase{
 
 public:
-    HCFitnessTransaction(HillClimberService::AsyncService* service, ServerCompletionQueue* cq);
+    HCFitnessTransaction(HillClimberService::AsyncService* service, ServerCompletionQueue* cq, mongocxx::database db);
     void Process() override ;
 
 private:
-    ServerContext ctx_;
     FitnessRequest request_;
     FitnessResponse reply_;
     ServerAsyncResponseWriter<FitnessResponse> responder_;

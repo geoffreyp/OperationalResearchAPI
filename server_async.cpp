@@ -51,7 +51,7 @@ private:
     void handleRpcs() {
 
         new HCInitTransaction(&service_, cq_.get(), db); // Spawn a new CallData instance to serve new clients.
-        new HCFitnessTransaction(&service_, cq_.get());
+        new HCFitnessTransaction(&service_, cq_.get(), db);
         new HCStopTransaction(&service_, cq_.get());
         void* tag;
         bool ok;
