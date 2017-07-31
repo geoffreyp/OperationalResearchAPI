@@ -14,3 +14,6 @@ build/server_async
 
 # Protobuff
 protoClassServer
+
+# Mac
+.DS_Store
