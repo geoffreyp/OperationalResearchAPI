@@ -37,23 +37,23 @@ grpc_generate_cpp(GRPC_SRCS GRPC_HDRS ${PROTO_SRC_DIR} ${PROTO_FILE_HCFI})
 file(GLOB LIBS_H_SRC libs/*.h)
 file(GLOB LIBS_CPP_SRC libs/*.cpp)
 
-# Add services
-file(GLOB GRPC_SERVICES_H_SRC grpcServices/*.h)
-file(GLOB GRPC_SERVICES_CPP_SRC grpcServices/*.cpp)
 
 # Add grpcCallData
 file(GLOB GRPC_CALL_DATA_H grpcCallData/*/*.h)
 file(GLOB GRPC_CALL_DATA_CPP grpcCallData/*/*.cpp)
 
-# Building server
+
+# Building server_async
 add_executable(server
         ${CMAKE_CURRENT_SOURCE_DIR}/server.cpp
         ${PROTO_SRCS}
         ${GRPC_SRCS}
         ${LIBS_H_SRC}
         ${LIBS_CPP_SRC}
-        ${GRPC_SERVICES_H_SRC}
-        ${GRPC_SERVICES_CPP_SRC})
+        ${CMAKE_CURRENT_SOURCE_DIR}/grpcCallData/CallData.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/grpcCallData/CallData.cpp
+        ${GRPC_CALL_DATA_H}
+        ${GRPC_CALL_DATA_CPP})
 target_link_libraries(server
         gRPC::grpc++_reflection
         protobuf::libprotobuf
@@ -61,26 +61,5 @@ target_link_libraries(server
 
 target_link_libraries(server ${LIBMONGOCXX_LIBRARIES})
 target_link_libraries(server ${LIBBSONCXX_LIBRARIES})
-
-# Building server_async
-add_executable(server_async
-        ${CMAKE_CURRENT_SOURCE_DIR}/server_async.cpp
-        ${PROTO_SRCS}
-        ${GRPC_SRCS}
-        ${LIBS_H_SRC}
-        ${LIBS_CPP_SRC}
-        ${GRPC_SERVICES_H_SRC}
-        ${GRPC_SERVICES_CPP_SRC}
-        ${CMAKE_CURRENT_SOURCE_DIR}/grpcCallData/CallData.h
-        ${CMAKE_CURRENT_SOURCE_DIR}/grpcCallData/CallData.cpp
-        ${GRPC_CALL_DATA_H}
-        ${GRPC_CALL_DATA_CPP})
-target_link_libraries(server_async
-        gRPC::grpc++_reflection
-        protobuf::libprotobuf
-        )
-
-target_link_libraries(server_async ${LIBMONGOCXX_LIBRARIES})
-target_link_libraries(server_async ${LIBBSONCXX_LIBRARIES})
 
 link_libraries(OperationalResearchApi ${LIBBSONCXX_LIBRARIES})
