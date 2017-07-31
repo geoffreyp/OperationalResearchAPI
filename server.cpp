@@ -50,9 +50,12 @@ private:
     // This can be run in multiple threads if needed.
     void handleRpcs() {
 
-        new HCInitTransaction(&service_, cq_.get(), db); // Spawn a new CallData instance to serve new clients.
+        // Spawn a all new CallData instances to serve new clients.
+        // HillClimberFI CallData instances
+        new HCInitTransaction(&service_, cq_.get(), db);
         new HCFitnessTransaction(&service_, cq_.get(), db);
         new HCStopTransaction(&service_, cq_.get(), db);
+        
         void* tag;
         bool ok;
         while (true) {
