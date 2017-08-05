@@ -10,8 +10,7 @@ using grpc::ServerBuilder;
 using grpc::ServerContext;
 using grpc::ServerCompletionQueue;
 using grpc::Status;
-using hcfi::StopRequest;
-using hcfi::StopResponse;
+
 
 class HCStopTransaction : public HCBase{
 

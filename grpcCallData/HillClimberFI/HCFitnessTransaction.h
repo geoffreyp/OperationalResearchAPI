@@ -10,8 +10,6 @@ using grpc::ServerBuilder;
 using grpc::ServerContext;
 using grpc::ServerCompletionQueue;
 using grpc::Status;
-using hcfi::FitnessRequest;
-using hcfi::FitnessResponse;
 
 class HCFitnessTransaction : public HCBase{
 

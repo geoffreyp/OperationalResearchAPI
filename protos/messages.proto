@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+
+
+message InitTransactionRequest {
+    string customer = 1;
+    int32 solutionSize = 2;
+    double fitness = 3;
+    string solution = 4;
+    string algorithm = 5;
+    string type = 6;
+}
+
+message FitnessResponse {
+    string id = 1;
+    string solution = 2;
+}
+
+message FitnessRequest {
+    string id = 1;
+    double fitness = 2;
+    string solution = 3;
+}
+
+message StopRequest {
+    string id = 1;
+    string message = 2;
+}
+
+message StopResponse {
+    string id = 1;
+    string solution = 2;
+    double fitness = 3;
+}

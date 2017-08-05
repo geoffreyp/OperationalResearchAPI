@@ -10,8 +10,7 @@ using grpc::ServerBuilder;
 using grpc::ServerContext;
 using grpc::ServerCompletionQueue;
 using grpc::Status;
-using hcfi::InitTransactionRequest;
-using hcfi::FitnessResponse;
+
 
 class HCInitTransaction : public HCBase{
 

@@ -3,7 +3,9 @@
 
 #include <grpc++/grpc++.h>
 #include <grpc/support/log.h>
-#include "hcfi.grpc.pb.h"
+#include "../protoClassServer/hcfi.grpc.pb.h"
+#include "../protoClassServer/messages.grpc.pb.h"
+
 
 
 using grpc::ServerContext;
