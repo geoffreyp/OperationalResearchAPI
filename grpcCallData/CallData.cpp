@@ -1,7 +1,7 @@
 #include "CallData.h"
 
-CallData::CallData(HillClimberService::AsyncService* service, ServerCompletionQueue* cq)
-: service_(service), cq_(cq), status_(PROCESS) {}
+CallData::CallData(ServerCompletionQueue* cq)
+: cq_(cq), status_(PROCESS) {}
 
 void CallData:: proceed() {
     if (status_ == PROCESS) {

@@ -14,13 +14,12 @@ using hcfi::HillClimberService;
 
 class CallData {
 public:
-    CallData(HillClimberService::AsyncService* service, ServerCompletionQueue* cq);
+    CallData(ServerCompletionQueue* cq);
     virtual ~CallData() {}
     void proceed();
 
 protected:
     virtual void Process() = 0;
-    HillClimberService::AsyncService* service_;
     ServerCompletionQueue* cq_;
 
 private:
