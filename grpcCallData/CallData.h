@@ -10,7 +10,6 @@
 
 using grpc::ServerContext;
 using grpc::ServerCompletionQueue;
-using hcfi::HillClimberService;
 
 class CallData {
 public:
