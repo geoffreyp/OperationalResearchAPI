@@ -30,9 +30,10 @@ include_directories(${PROTO_SRC_DIR})
 
 # Add protobuf files
 set(PROTO_FILE_HCFI ${CMAKE_CURRENT_SOURCE_DIR}/protos/hcfi.proto)
+set(PROTO_FILE_TABOU ${CMAKE_CURRENT_SOURCE_DIR}/protos/tabousearch.proto)
 set(PROTO_FILE_HELLO ${CMAKE_CURRENT_SOURCE_DIR}/protos/messages.proto)
-protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS ${PROTO_SRC_DIR} ${PROTO_FILE_HCFI} ${PROTO_FILE_HELLO})
-grpc_generate_cpp(GRPC_SRCS GRPC_HDRS ${PROTO_SRC_DIR} ${PROTO_FILE_HCFI} ${PROTO_FILE_HELLO})
+protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS ${PROTO_SRC_DIR} ${PROTO_FILE_HCFI} ${PROTO_FILE_HELLO} ${PROTO_FILE_TABOU})
+grpc_generate_cpp(GRPC_SRCS GRPC_HDRS ${PROTO_SRC_DIR} ${PROTO_FILE_HCFI} ${PROTO_FILE_HELLO} ${PROTO_FILE_TABOU})
 
 # Add libs & helpers
 file(GLOB LIBS_H_SRC libs/*.h)
