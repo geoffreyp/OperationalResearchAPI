@@ -5,7 +5,7 @@
 #include "HCInitTransaction.h"
 #include "../../libs/helper.h"
 
-HCInitTransaction::HCInitTransaction(HillClimberService::AsyncService* service, ServerCompletionQueue* cq, mongocxx::database db) :
+HCInitTransaction::HCInitTransaction(hcfi::HillClimberService::AsyncService* service, ServerCompletionQueue* cq, mongocxx::database db) :
         HCBase(service, cq, db), responder_(&ctx_) {
 service_->RequestInitTransaction(&ctx_, &request_, &responder_, cq_, cq_, this);
 }

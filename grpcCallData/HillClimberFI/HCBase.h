@@ -20,7 +20,7 @@ protected:
     mongocxx::collection fitness_coll;
     mongocxx::database db_;
     ServerContext ctx_;
-    HillClimberService::AsyncService* service_;
+    hcfi::HillClimberService::AsyncService* service_;
 };
 
 #endif //OPERATIONALRESEARCHAPI_HCBASE_H

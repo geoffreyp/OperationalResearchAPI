@@ -1,7 +1,7 @@
 #include "HCFitnessTransaction.h"
 #include "../../libs/helper.h"
 
-HCFitnessTransaction::HCFitnessTransaction(HillClimberService::AsyncService *service, ServerCompletionQueue *cq,  mongocxx::database db) :
+HCFitnessTransaction::HCFitnessTransaction(hcfi::HillClimberService::AsyncService *service, ServerCompletionQueue *cq,  mongocxx::database db) :
         HCBase(service, cq, db), responder_(&ctx_) {
     service_->RequestSendFitness(&ctx_, &request_, &responder_, cq_, cq_, this);
 }

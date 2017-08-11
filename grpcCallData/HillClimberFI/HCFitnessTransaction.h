@@ -14,7 +14,7 @@ using grpc::Status;
 class HCFitnessTransaction : public HCBase{
 
 public:
-    HCFitnessTransaction(HillClimberService::AsyncService* service, ServerCompletionQueue* cq, mongocxx::database db);
+    HCFitnessTransaction(hcfi::HillClimberService::AsyncService* service, ServerCompletionQueue* cq, mongocxx::database db);
     void Process() override ;
 
 private:

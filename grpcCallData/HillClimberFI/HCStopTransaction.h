@@ -15,7 +15,7 @@ using grpc::Status;
 class HCStopTransaction : public HCBase{
 
 public:
-    HCStopTransaction(HillClimberService::AsyncService* service, ServerCompletionQueue* cq, mongocxx::database db);
+    HCStopTransaction(hcfi::HillClimberService::AsyncService* service, ServerCompletionQueue* cq, mongocxx::database db);
     void Process() override ;
 
 private:

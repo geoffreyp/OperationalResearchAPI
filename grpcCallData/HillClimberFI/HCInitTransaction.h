@@ -15,7 +15,7 @@ using grpc::Status;
 class HCInitTransaction : public HCBase{
 
 public:
-    HCInitTransaction(HillClimberService::AsyncService* service, ServerCompletionQueue* cq, mongocxx::database db);
+    HCInitTransaction(hcfi::HillClimberService::AsyncService* service, ServerCompletionQueue* cq, mongocxx::database db);
     void Process() override ;
 
 private:
