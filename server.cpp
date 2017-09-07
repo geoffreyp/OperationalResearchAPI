@@ -7,6 +7,7 @@
 #include "grpcCallData/HillClimberFI/HCStopTransaction.h"
 
 #include "grpcCallData/TabuSearch/TSInitTransaction.h"
+#include "grpcCallData/TabuSearch/TSStopTransaction.h"
 
 #define BDD "api"
 
@@ -59,6 +60,7 @@ private:
         new HCStopTransaction(&serviceHC_, cq_.get(), db);
 
         new TSInitTransaction(&serviceTS_, cq_.get(), db);
+        new TSStopTransaction(&serviceTS_, cq_.get(), db);
         
         void* tag;
         bool ok;
