@@ -41,7 +41,8 @@ void TSFitnessTransaction::Process() {
      */
 
     reply_.set_id(request_.id());
-    reply_.set_solution(getNeighbourSolution(request_.solution()));
+    reply_.add_solutions(getNeighbourSolution(request_.solutions(0)));
+    reply_.add_solutions(getNeighbourSolution(request_.solutions(0)));
 
     responder_.Finish(reply_, Status::OK, this);
 }

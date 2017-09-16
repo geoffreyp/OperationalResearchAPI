@@ -22,6 +22,17 @@ message GenericFitnessRequest {
     double fitness = 2;
     string solution = 3;
 }
+message MultiFitnessResponse {
+    string id = 1;
+    repeated string solutions = 2;
+    int32 iteration = 3;
+}
+
+message MultiFitnessRequest {
+    string id = 1;
+    repeated double fitnesses = 2;
+    repeated string solutions = 3;
+}
 
 message StopRequest {
     string id = 1;

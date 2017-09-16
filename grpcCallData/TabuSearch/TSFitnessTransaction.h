@@ -18,9 +18,9 @@ public:
     void Process() override ;
 
 private:
-    GenericFitnessRequest request_;
-    GenericFitnessResponse reply_;
-    ServerAsyncResponseWriter<GenericFitnessResponse> responder_;
+    MultiFitnessRequest request_;
+    MultiFitnessResponse reply_;
+    ServerAsyncResponseWriter<MultiFitnessResponse> responder_;
 
 };
 

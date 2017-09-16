@@ -20,8 +20,8 @@ public:
 
 private:
     InitTransactionRequest request_;
-    GenericFitnessResponse reply_;
-    ServerAsyncResponseWriter<GenericFitnessResponse> responder_;
+    MultiFitnessResponse reply_;
+    ServerAsyncResponseWriter<MultiFitnessResponse> responder_;
 
 };
 

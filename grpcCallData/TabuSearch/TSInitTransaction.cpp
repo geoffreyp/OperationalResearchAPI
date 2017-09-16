@@ -38,7 +38,10 @@ void TSInitTransaction::Process() {
 
     // set the response
     reply_.set_id(transactionId.get_oid().value.to_string());
-    reply_.set_solution(getNeighbourSolution(request_.solution()));
+
+    std::string str = getNeighbourSolution(request_.solution());
+
+    reply_.add_solutions(str);
 
 
     responder_.Finish(reply_, Status::OK, this);
