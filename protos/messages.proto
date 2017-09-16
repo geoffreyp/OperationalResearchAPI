@@ -11,12 +11,13 @@ message InitTransactionRequest {
     string type = 6;
 }
 
-message FitnessResponse {
+message GenericFitnessResponse {
     string id = 1;
     string solution = 2;
+    int32 iteration = 3;
 }
 
-message FitnessRequest {
+message GenericFitnessRequest {
     string id = 1;
     double fitness = 2;
     string solution = 3;

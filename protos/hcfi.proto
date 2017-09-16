@@ -4,8 +4,8 @@ syntax = "proto3";
 package hcfi;
 
 service HillClimberService {
-    rpc InitTransaction (InitTransactionRequest) returns (FitnessResponse) {}
-    rpc SendFitness (FitnessRequest) returns (FitnessResponse) {}
+    rpc InitTransaction (InitTransactionRequest) returns (GenericFitnessResponse) {}
+    rpc SendFitness (GenericFitnessRequest) returns (GenericFitnessResponse) {}
     rpc StopTransaction (StopRequest) returns (StopResponse) {}
 }
 
