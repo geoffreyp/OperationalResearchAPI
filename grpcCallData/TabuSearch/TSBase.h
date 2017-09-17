@@ -10,6 +10,7 @@
 
 #define TRANSACTION_COLLECTION "transactions"
 #define FITNESS_COLLECTION "fitnesses"
+#define TABULIST_COLLECTION "tabulist"
 
 class TSBase : public CallData{
 public:
@@ -18,6 +19,7 @@ public:
 protected:
     mongocxx::collection transac_coll;
     mongocxx::collection fitness_coll;
+    mongocxx::collection tabu_list_coll;
     mongocxx::database db_;
     ServerContext ctx_;
     ts::TabouSearchService::AsyncService* service_;
