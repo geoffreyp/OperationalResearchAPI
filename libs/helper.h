@@ -10,10 +10,10 @@
 #include <algorithm>
 #include <sstream>
 #include <iterator>
-#include <iostream>
 
 std::string generateId();
 std::string getNeighbourSolution(const std::string& solution);
 const std::vector<std::string> explode(const std::string& s, const char& c);
+const std::string vectorToString(std::vector<std::string> v);
 
 #endif //OPERATIONALRESEARCHAPI_HELPER_H
