@@ -1,5 +1,5 @@
 #include "TSInitTransaction.h"
-#include "../../libs/helper.h"
+#include "../../libs/tabousearch.h"
 
 TSInitTransaction::TSInitTransaction(ts::TabouSearchService::AsyncService* service, ServerCompletionQueue* cq, mongocxx::database db) :
         TSBase(service, cq, db), responder_(&ctx_) {
@@ -39,9 +39,12 @@ void TSInitTransaction::Process() {
     // set the response
     reply_.set_id(transactionId.get_oid().value.to_string());
 
-    std::string str = getNeighbourSolution(request_.solution());
+    std::vector<std::string> v = getAllNeighbors(request_.solution());
 
-    reply_.add_solutions(str);
+    for (const std::string & str : v ) {
+        reply_.add_solutions(str);
+        std::cout << str <<std::endl;
+    }
 
 
     responder_.Finish(reply_, Status::OK, this);
