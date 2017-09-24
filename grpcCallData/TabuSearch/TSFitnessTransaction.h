@@ -10,6 +10,7 @@ using grpc::ServerBuilder;
 using grpc::ServerContext;
 using grpc::ServerCompletionQueue;
 using grpc::Status;
+using grpc::StatusCode;
 
 class TSFitnessTransaction : public TSBase{
 

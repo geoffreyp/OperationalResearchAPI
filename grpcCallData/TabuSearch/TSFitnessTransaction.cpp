@@ -13,7 +13,12 @@ void TSFitnessTransaction::Process() {
      * set the response
      */
 
-    // todo : test if solutions_size == fitnesses_size
+    // Test if solutions_size == fitnesses_size
+    if(request_.solutions_size() != request_.fitnesses_size()){
+        Status status_perso = Status(StatusCode::INVALID_ARGUMENT, "The number of solutions and the number of fitness have to be equals");
+        responder_.Finish(reply_, status_perso, this);
+        return;
+    }
 
     // Find the best neighbor for this iteration
     int bestI = 0;
