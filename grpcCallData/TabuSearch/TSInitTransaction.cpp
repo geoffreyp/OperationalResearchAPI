@@ -43,7 +43,6 @@ void TSInitTransaction::Process() {
 
     for (const std::string & str : v ) {
         reply_.add_solutions(str);
-        std::cout << str <<std::endl;
     }
 
 

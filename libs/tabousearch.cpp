@@ -25,12 +25,10 @@ std::vector<std::string> getAllNeighbors(std::string solution){
     for (int i=0; i < vSolution.size(); i++) {
         for (int j=0; j < vSolution.size(); j++) {
             if (i != j){
-                std::cout << "in4 " <<i <<" - "<< j << std::endl;
                 std::vector<std::string> vNeighbor = vSolution;
                 std::string tmp = vNeighbor[i];
                 vNeighbor[i] = vNeighbor[j];
                 vNeighbor[j] = tmp;
-                std::cout << "in5" << std::endl;
                 vAllNeighbors.push_back(vectorToString(vNeighbor));
             }
         }

@@ -1,5 +1,5 @@
 #include "TSFitnessTransaction.h"
-#include "../../libs/helper.h"
+#include "../../libs/tabousearch.h"
 
 TSFitnessTransaction::TSFitnessTransaction(ts::TabouSearchService::AsyncService *service, ServerCompletionQueue *cq,  mongocxx::database db) :
         TSBase(service, cq, db), responder_(&ctx_) {
@@ -10,39 +10,31 @@ void TSFitnessTransaction::Process() {
     new TSFitnessTransaction(service_, cq_, db_);
 
     /*
-     * Pseudo Code from wikipedia : https://en.wikipedia.org/wiki/Tabu_search
-     *
-  sBest ← s0
-  tabuList ← []
-  tabuList.push(s0)
-  while (not stoppingCondition())
-  	sNeighborhood ← getNeighbors(bestCandidate)
-  	bestCandidate ← sNeighborHood.firstElement
-  	for (sCandidate in sNeighborhood)
-  		if ( (not tabuList.contains(sCandidate)) and (fitness(sCandidate) > fitness(bestCandidate)) )
-  			bestCandidate ← sCandidate
- 		end
- 	end
- 	if (fitness(bestCandidate) > fitness(sBest))
- 		sBest ← bestCandidate
- 	end
- 	tabuList.push(bestCandidate)
- 	if (tabuList.size > maxTabuSize)
- 		tabuList.removeFirst()
- 	end
- end
- return sBest
-     */
-
-
-
-    /*
      * set the response
      */
 
+    // todo : test if solutions_size == fitnesses_size
+
+    // Find the best neighbor for this iteration
+    int bestI = 0;
+    double bestFitness = request_.fitnesses(0);
+    for (int i = 0; i < request_.solutions_size(); ++i) {
+        if(request_.fitnesses(i) < bestFitness){
+            bestFitness = request_.fitnesses(i);
+            bestI = i;
+        }
+    }
+    std::cout << "best  : " << bestFitness << " for i = " << bestI << std::endl;
     reply_.set_id(request_.id());
-    reply_.add_solutions(getNeighbourSolution(request_.solutions(0)));
-    reply_.add_solutions(getNeighbourSolution(request_.solutions(0)));
+
+    std::vector<std::string> neighborsOfBest = getAllNeighbors(request_.solutions(bestI));
+
+    std::cout << "best solution : "<< request_.solutions(bestI) << std::endl;
+    for (auto neighbor:neighborsOfBest){
+        reply_.add_solutions(neighbor);
+    }
+
+    // todo : add the move in tabu_list
 
     responder_.Finish(reply_, Status::OK, this);
 }
