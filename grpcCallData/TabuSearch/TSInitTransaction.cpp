@@ -22,7 +22,7 @@ void TSInitTransaction::Process() {
 
 
     bsoncxx::builder::stream::document documentFitness{};
-    documentFitness << "transaction_id" << transactionId;
+    documentFitness << "transaction_id" << transactionId.get_oid().value.to_string();
     documentFitness << "solution" << request_.solution();
     documentFitness << "fitness" << request_.fitness();
     bsoncxx::types::value  fitnessId = fitness_coll.insert_one(documentFitness.view())->inserted_id();
